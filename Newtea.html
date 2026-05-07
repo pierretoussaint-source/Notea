@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.plant-stem-icon { stroke: var(--theme-secondary-color, %234CAF50); stroke-width: 1.5; stroke-linecap: round; }.plant-leaf-icon { fill: var(--theme-secondary-color, %2366BB6A); }.n-stylized-icon { fill: var(--theme-heading-color, %23227A49); }.icon-background { fill: var(--theme-card-background-color, white); stroke: var(--theme-secondary-color, %23DDD); stroke-width:1; }%3C/style%3E%3Ccircle class='icon-background' cx='40' cy='40' r='38'/%3E%3Cpath d='M30 55 L30 25 M30 25 L50 55 M50 55 L50 25' stroke='var(--theme-heading-color, %23227A49)' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cg transform='translate(40, 15) scale(0.45)'%3E%3Cline class='plant-stem-icon' x1='0' y1='10' x2='0' y2='-3'/%3E%3Cellipse cx='0' cy='-8' rx='5' ry='7' fill='var(--theme-sorgho-primary-color, %23C0392B)'/%3E%3C/g%3E%3Cg transform='translate(18, 38) scale(0.45)'%3E%3Cline class='plant-stem-icon' x1='0' y1='12' x2='0' y2='-3'/%3E%3Ccircle cx='0' cy='-8' r='5' fill='var(--theme-primary-color, %23FFD700)'/%3E%3Ccircle cx='0' cy='-8' r='2' fill='var(--theme-secondary-color, %23A0522D)'/%3E%3C/g%3E%3Cg transform='translate(62, 38) scale(0.45)'%3E%3Crect class='plant-leaf-icon' x='-2' y='-10' width='4' height='18' rx='1'/%3E%3Cpath stroke='var(--theme-primary-color, %23E6B800)' stroke-width='1.5' fill='none' d='M-1.5,-10 Q0,-14 1.5,-10 M0,-10 Q-2.5,-13 -3,-9 M0,-10 Q2.5,-13 3,-9'/%3E%3C/g%3E%3Cg transform='translate(25, 60) scale(0.4)'%3E%3Cline class='plant-stem-icon' x1='0' y1='10' x2='0' y2='-1'/%3E%3Ccircle cx='0' cy='-3' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3Ccircle cx='-3' cy='-5' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3Ccircle cx='3' cy='-5' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3C/g%3E%3Cg transform='translate(55, 60) scale(0.4)'%3E%3Cpath class='plant-leaf-icon' d='M0,12 Q-8,3 -4,-4 Q0,-8 4,-4 Q8,3 0,12 Z'/%3E%3Ccircle cx='-2' cy='-1' r='1' fill='var(--theme-soja-primary-color, %23E1BEE7)'/%3E%3Ccircle cx='2' cy='-1' r='1' fill='var(--theme-soja-primary-color, %23E1BEE7)'/%3E%3C/g%3E%3C/svg%3E">
+    <title>Newtea (Fusion)</title>
+    
+    <!-- Ajout du script QR Code -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <style>
+        html { font-size: 13px; overflow-x: hidden; }
+        body { overflow-x: hidden; font-family: var(--theme-font-family); margin: 0; padding: 15px; background-color: var(--theme-background-color); color: var(--theme-text-color); transition: background-color 0.5s ease, color 0.5s ease; }
+        
+        :root {
+            --theme-primary-color: #33A532; --theme-secondary-color: #227A49; 
+            --theme-text-on-primary: white; --theme-text-on-secondary: white;
+            --theme-heading-color: #227A49; --theme-button-hover-bg: #227A49;
+            --theme-tab-active-bg: #33A532; --theme-tab-active-text: white;
+            --theme-gps-button-bg: #007bff; --theme-gps-button-text: white;
+            --theme-input-border-color: #ced4da;
+            --theme-text-color: #495057; --theme-background-color: #f8f9fa;
+            --theme-card-background-color: #ffffff; --theme-card-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            --theme-font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body.dark-mode {
+            --theme-primary-color: #44b543; --theme-secondary-color: #2b9159; 
+            --theme-heading-color: #44b543; --theme-button-hover-bg: #2b9159;
+            --theme-text-color: #e0e0e0; --theme-background-color: #121212;
+            --theme-card-background-color: #1e1e1e; --theme-card-shadow: 0 3px 8px rgba(0,0,0,0.4);
+            --theme-input-border-color: #444; 
+        }
+        body.dark-mode input, body.dark-mode select, body.dark-mode textarea { background-color: #2c2c2c; color: #fff; border-color: #555; }
+        body.dark-mode .setup-section { background: #2c2c2c; border-color:#444; }
+        body.dark-mode .tablink { background-color: #333; color: #aaa; }
+        body.dark-mode .tablink.active { background-color: var(--theme-tab-active-bg); color: var(--theme-tab-active-text); }
+        body.dark-mode th, body.dark-mode td { border-color: #444; }
+        body.dark-mode .modal-content { background-color: #1e1e1e; color: #e0e0e0; }
+        body.dark-mode .notation-group-container { background-color: #242424; border-color:#444;}
+        body.dark-mode .not-btn-choix { background-color: #333; color: #ddd; border-color: #555;}
+        body.dark-mode .not-btn-choix.active { background-color: var(--theme-secondary-color); color: white; }
+        body.dark-mode .plot-disabled { background-color: #2a2a2a !important; color: #555 !important; border-color: #444 !important; }
+        body.dark-mode .interactive-val { background: rgba(0,0,0,0.6); color: #fff; border-color:#555;}
+
+        .theme-mais { --theme-primary-color: #f1c40f; --theme-secondary-color: #27ae60; --theme-text-on-primary: #333; --theme-heading-color: #27ae60; --theme-tab-active-bg: #f1c40f; }
+        .theme-tournesol { --theme-primary-color: #e67e22; --theme-secondary-color: #2c3e50; --theme-text-on-primary: white; --theme-heading-color: #e67e22; --theme-tab-active-bg: #e67e22; }
+        .theme-colza { --theme-primary-color: #f4d03f; --theme-secondary-color: #2ecc71; --theme-text-on-primary: #333; --theme-heading-color: #27ae60; --theme-tab-active-bg: #f4d03f; }
+        .theme-soja { --theme-primary-color: #a2d9ce; --theme-secondary-color: #50623a; --theme-text-on-primary: #333; --theme-heading-color: #50623a; --theme-tab-active-bg: #a2d9ce; }
+        .theme-sorgho { --theme-primary-color: #c0392b; --theme-secondary-color: #795548; --theme-text-on-primary: white; --theme-heading-color: #c0392b; --theme-tab-active-bg: #c0392b; }
+        
+        h1, h2, h3, h4 { color: var(--theme-heading-color); margin-top: 0; }
+        
+        .tabs { overflow: hidden; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
+        .tablink { background-color: #e9ecef; float: left; border: none; outline: none; cursor: pointer; padding: 12px 18px; transition: 0.3s; font-size: 1em; border-radius: 6px 6px 0 0; margin-right: 3px; color: #495057; }
+        .tablink.active { background-color: var(--theme-tab-active-bg); color: var(--theme-tab-active-text); font-weight: 500; }
+        .tabcontent { display: none; padding: 15px 0; }
+        
+        #session-setup, .sidebar, .main-panel, #Configuration div { padding: 20px; background-color: var(--theme-card-background-color); border-radius: 10px; box-shadow: var(--theme-card-shadow); margin-bottom:25px; }
+        #app-container { max-width: 1400px; margin: 0 auto; }
+        #app-content { display: flex; flex-wrap: wrap; gap: 25px; }
+        
+        .sidebar { flex: 1.3; min-width: 480px; box-sizing: border-box; } 
+        .main-panel { flex: 2; min-width: 450px; box-sizing: border-box; }
+        
+        label { display: block; margin-bottom: 6px; width: 100%; font-weight: 500; font-size: 0.95em; color: #343a40; }
+        input, select, textarea { padding: 10px; border: 1px solid var(--theme-input-border-color); border-radius: 5px; font-size: 1em; width: 100%; margin-bottom: 12px; box-sizing: border-box; }
+        .date-input-field { height: 45px; }
+        
+        button { background-color: var(--theme-primary-color); color: var(--theme-text-on-primary); border: none; padding: 12px 18px; font-size: 1em; font-weight: 500; cursor: pointer; border-radius: 6px; margin-top:15px; transition: 0.2s; }
+        button:hover { background-color: var(--theme-button-hover-bg); transform: translateY(-1px); }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-accent { background-color: var(--theme-secondary-color); color: var(--theme-text-on-secondary); }
+        .btn-block { width: 100%; display: block; }
+
+        .square-btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 5px; }
+        .square-btn { width: 38px; height: 38px; line-height: 36px;font-size: 1.1em; border: 1px solid #adb5bd; background-color: #f8f9fa; text-align: center; cursor: pointer; border-radius: 4px; vertical-align: middle; }
+        .square-btn.selected { background-color: var(--theme-secondary-color); color: var(--theme-text-on-secondary); font-weight: bold; border-color: var(--theme-secondary-color); }
+
+        #mini-plan-container { overflow-x: auto; margin-bottom: 15px; border-radius: 5px; border: 1px solid var(--theme-input-border-color); background: var(--theme-card-background-color); }
+        #mini-plan-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        #mini-plan-table th, #mini-plan-table td { border: 1px solid var(--theme-input-border-color); text-align: center; padding: 8px 4px; position: relative; }
+        #mini-plan-table th { background-color: var(--theme-secondary-color); color: white; }
+        #mini-plan-table td.mini-cell { cursor: pointer; transition: background 0.2s; }
+        #mini-plan-table td.mini-cell:hover { background-color: #e9ecef; }
+        body.dark-mode #mini-plan-table td.mini-cell:hover { background-color: #444; }
+        #mini-plan-table td.mini-selected { background-color: var(--theme-primary-color) !important; color: white !important; font-weight: bold; box-shadow: inset 0 0 0 2px #fff;}
+
+        .plot-disabled { background-color: #e0e0e0 !important; color: #a0a0a0 !important; cursor: not-allowed !important; opacity: 0.6; }
+
+        .cube-btn { width: 45px !important; height: 45px !important; padding: 0 !important; margin: 0 !important; display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.8em !important; font-weight: bold !important; border-radius: 10px !important; flex-shrink: 0; line-height: 1; }
+
+        .espece-gps-line { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        #voir-sur-carte, #voir-plan-semis { margin: 0; padding: 4px 8px; font-size: 0.85em; width: auto; border-radius: 4px; display:inline-block; }
+        #voir-sur-carte { background-color: var(--theme-gps-button-bg); color: var(--theme-gps-button-text); }
+        
+        .modal { display: none; position: fixed; z-index: 100000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: var(--theme-card-background-color); margin: 5% auto; padding: 20px; border: 1px solid #888; width: 90%; max-width: 800px; border-radius: 8px; max-height: 90vh; overflow-y: auto; }
+        
+        .input-inc-dec { display: flex; align-items: center; justify-content: center; margin-bottom: 12px; gap: 10px; }
+        .input-inc-dec input { width: 90px !important; height: 45px !important; margin: 0; text-align: center; font-size: 1.2em; font-weight: bold; box-sizing: border-box; }
+
+        .input-group-big { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-bottom: 15px; }
+        .input-wrapper-relative { position: relative; width: 90px; }
+        .input-big-text { width: 100% !important; height: 45px !important; text-align: center; padding-right: 25px; font-size: 1.2em; font-weight: bold; margin:0 !important; box-sizing: border-box; }
+        .clear-icon-inside { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 1.4em; display: none; z-index: 5; }
+
+        .save-buttons-container { display: flex; gap: 5px; margin-top: 15px; }
+        .save-buttons-container button { flex: 1; padding: 15px 2px; font-size: 0.9em; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .hidden-section { display: none !important; }
+        .notation-group-container { border: 1px solid var(--theme-input-border-color); padding: 10px; border-radius: 5px; margin-bottom: 15px; background-color: var(--theme-card-background-color); transition: all 0.3s ease; }
+        
+        .not-buttons-row { display: flex; gap: 2px; margin-bottom: 10px; flex-wrap: nowrap !important; width: 100%; overflow: hidden; }
+        .not-btn-choix { flex: 1 1 0; min-width: 0; height: 45px; padding: 2px; font-size: 0.75em; background-color: #e9ecef; color: #333; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 500; }
+        .not-btn-choix.active { background-color: var(--theme-secondary-color); color: white; border-color: var(--theme-secondary-color); box-shadow: inset 0 3px 5px rgba(0,0,0,0.2); }
+        
+        .simple-notation-line { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; border-bottom: 1px solid var(--theme-input-border-color); padding-bottom: 10px; }
+        .simple-not-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.9em;}
+        #bbch-table { width: 100%; margin-top: 15px; border-collapse: collapse; }
+        #bbch-table th, #bbch-table td { border: 1px solid var(--theme-input-border-color); padding: 8px; text-align: left; font-size: 0.9em; }
+        #bbch-table th { background-color: var(--theme-secondary-color); color:white; font-weight: bold; }
+
+        /* CSS POUR LE PLAN DE SEMIS (MODAL) AVEC STICKY HEADERS CORRIGÉ ET RESPONSIVE */
+        #sowing-plan-grid-container { max-height: 60vh; overflow: auto; border: 1px solid var(--theme-input-border-color); position: relative; background: var(--theme-background-color); }
+        #sowing-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: max-content; }
+        #sowing-table th, #sowing-table td { border-right: 1px solid var(--theme-input-border-color); border-bottom: 1px solid var(--theme-input-border-color); text-align: center; padding: 8px; font-size: 0.9em; background-color: var(--theme-card-background-color); position: relative;}
+        
+        .sticky-x-bottom { position: sticky !important; bottom: 0 !important; background: var(--theme-secondary-color) !important; color:white !important; z-index: 10 !important; font-weight: bold !important; border-top: 2px solid #555 !important; border-bottom: none !important;}
+        .sticky-y { position: sticky !important; left: 0 !important; background: var(--theme-secondary-color) !important; color:white !important; z-index: 9 !important; font-weight: bold !important; border-right: 2px solid #555 !important;}
+        .sticky-corner-bottom { position: sticky !important; bottom: 0 !important; left: 0 !important; z-index: 11 !important; background: var(--theme-secondary-color) !important; color:white !important; border-top: 2px solid #555 !important; border-right: 2px solid #555 !important; border-bottom: none !important;}
+        
+        .current-plot-cell { background-color: var(--theme-primary-color) !important; color: white !important; font-weight: bold; box-shadow: inset 0 0 0 2px #fff; }
+        .plan-cell { cursor: pointer; transition: 0.2s; }
+        .plan-cell:hover { filter: brightness(0.9); }
+        .multi-selected { background-color: #e74c3c !important; color: white !important; box-shadow: inset 0 0 0 2px #c0392b !important; }
+
+        .type-M { background-color: #e3f2fd !important; color:#333 !important; } 
+        .type-F { background-color: #e8f5e9 !important; color:#333 !important; } 
+        .type-H { background-color: #fff9c4 !important; color:#333 !important; }
+        .hatched-pattern { background-image: linear-gradient(45deg, rgba(0,0,0,0.15) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15) 75%, transparent 75%, transparent); background-size: 8px 8px; }
+        .variete-highlight { font-weight: 900; box-shadow: inset 0 0 0 3px #333; border-radius: 4px; }
+
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--theme-secondary-color); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        .progress-container { width: 100%; background-color: #e0e0e0; border-radius: 5px; margin-bottom: 15px; height: 20px; overflow: hidden; position: relative; }
+        .progress-bar { height: 100%; background-color: var(--theme-secondary-color); width: 0%; transition: width 0.5s ease; }
+        .progress-text { position: absolute; width: 100%; text-align: center; top: 0; line-height: 20px; font-size: 0.8em; color: #333; font-weight: bold; text-shadow: 0 0 2px white; }
+        
+        .mic-btn { position: absolute; right: 10px; bottom: 50px; background-color: white; border: 1px solid #ccc; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 1.2em; }
+        
+        .btn-star, .btn-multi { background: transparent; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 1.1em; padding: 2px 8px; color: #f1c40f; transition: 0.2s; background-color: #fff; }
+        .btn-multi { color: #3498db; }
+        .btn-star:hover, .btn-multi:hover { background-color: #f8f9fa; transform: scale(1.05); }
+
+        .interactive-controls { background-color: #f1f8e9; border: 1px solid #c8e6c9; padding: 10px; margin-bottom: 10px; border-radius: 6px; display: none; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .interactive-controls.active { display: flex; }
+        .interactive-label { font-weight: bold; color: var(--theme-secondary-color); font-size: 0.9em; margin-right:5px;}
+        .interactive-val { font-weight: bold; color: #333; background: rgba(255,255,255,0.8); padding: 1px 4px; border-radius: 3px; font-size: 1.1em; display:block; margin-top:2px; border: 1px solid rgba(0,0,0,0.1); text-shadow: 0 0 2px white; }
+        
+        /* BOUTON QR CODE CIRCULAIRE */
+        .qr-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.8em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            margin: 0 auto;
+        }
+        .qr-btn:hover { transform: scale(1.1); background-color: #d35400; }
+        .qr-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; margin-bottom: 15px; flex-direction: column; }
+        .qr-wrapper p { margin: 0; font-size: 0.9em; font-weight: bold; color: #e67e22;}
+
+        /* ZEN MODE STYLES SIMPLIFIÉS */
+        .zen-next-val-btn { display: none; }
+        #zen-content { width: 100%; max-width: 100vw; box-sizing: border-box; padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; overflow-y: auto; overflow-x: hidden; }
+        #zen-content .hidden-section { display: flex !important; flex-direction: column; width: 100%; flex-grow: 1; justify-content: flex-start; align-items: stretch; }
+        #zen-content .notation-group-container { border: none; background: transparent; box-shadow: none; margin-bottom: 0; width: 100%; padding: 0; flex-grow: 1; display: flex; flex-direction: column; }
+        #zen-content .simple-notation-line { border-bottom: none; width: 100%; display: flex; flex-direction: column; flex-grow: 1; }
+        #zen-content .btn-star, #zen-content .btn-danger, #zen-content .btn-multi, #zen-content #bbch-info-button { display: none !important; }
+        #zen-content .zen-title-wrapper { display: flex !important; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 3vh !important; flex-wrap: nowrap; }
+        #zen-content h4, #zen-content .simple-not-header span, #zen-content label[for="stade"] { font-size: clamp(1.5em, 5vw, 2.5em) !important; color: var(--theme-heading-color); }
+        #zen-content .zen-next-val-btn { display: inline-flex !important; font-size: 1.6em !important; padding: 10px 25px !important; border-radius: 20px !important; margin: 0 0 0 10px; min-height: 80px; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); flex-shrink: 0; }
+        #zen-content .input-inc-dec, #zen-content .input-group-big, #zen-content .date-grid-wrapper { display: flex !important; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 4vw; width: 100%; flex-grow: 1; margin-top: 2vh; }
+        #zen-content .input-inc-dec button, #zen-content .input-group-big button, #zen-content .date-grid-wrapper button { flex: 1 1 auto; max-width: 150px; height: 15vh !important; min-height: 80px; font-size: 4em !important; border-radius: 20px !important; margin: 0 !important; }
+        #zen-content .input-inc-dec input, #zen-content .input-wrapper-relative, #zen-content .date-input-field { flex: 2 1 auto; width: 100% !important; height: 15vh !important; min-height: 80px; font-size: 4em !important; margin: 0 !important; }
+        #zen-content .square-btn-group { display: flex !important; flex-wrap: wrap !important; gap: 3vw !important; width: 100%; justify-content: center; align-items: stretch; flex-grow: 1; align-content: center; }
+        #zen-content .square-btn { flex: 1 1 auto; min-width: 20%; height: 12vh !important; min-height: 60px; display: flex; align-items: center; justify-content: center; font-size: 2.5em !important; border-radius: 15px !important; box-shadow: 0 4px 8px rgba(0,0,0,0.15); line-height: 1 !important; margin: 0 !important; }
+
+        @media (max-width: 768px) {
+            html { font-size: 12px; }
+            .sidebar, .main-panel { min-width: 100% !important; box-sizing: border-box; }
+            #zen-content .input-inc-dec button, #zen-content .input-group-big button { max-width: 100px; height: 12vh !important; min-height: 60px; font-size: 3em !important; }
+            #zen-content .input-inc-dec input, #zen-content .input-wrapper-relative { height: 12vh !important; min-height: 60px; font-size: 2.5em !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div style="position: absolute; top: 15px; right: 15px; z-index: 100;">
+    <a href="tuto.html" target="_blank" style="text-decoration:none; padding: 8px 12px; border-radius: 20px; font-weight:bold; font-size: 0.9em; background-color: var(--theme-secondary-color); color: white; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">❓ Tuto</a>
+</div>
+
+<div style="text-align: center; margin-bottom: 15px;">
+    <svg width="200" height="70" viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
+        <path class="n-stylized" d="M88 50 L88 20 M88 20 L112 50 M112 50 L112 20" stroke="var(--theme-heading-color, #227A49)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <g transform="translate(35, 35) scale(0.8)"><line class="plant-stem" x1="0" y1="15" x2="0" y2="-5"/><circle cx="0" cy="-10" r="6" fill="var(--theme-primary-color, #FFD700)"/><circle cx="0" cy="-10" r="3" fill="var(--theme-secondary-color, #A0522D)"/><path class="plant-leaf" d="M0,5 Q5,0 2,-5 Q-5,-2 0,5 Z"/></g>
+        <g transform="translate(65, 38) scale(0.8)"><rect class="plant-leaf" x="-3" y="-15" width="6" height="25" rx="2"/><path stroke="var(--theme-primary-color, #E6B800)" stroke-width="1.5" fill="none" d="M-2,-15 Q0,-20 2,-15 M0,-15 Q-3,-18 -4,-14 M0,-15 Q3,-18 4,-14"/><path class="plant-leaf" d="M2,0 Q10,-5 8,-12 L3,-10 Q8,-3 2,0 Z"/><path class="plant-leaf" d="M-2,0 Q-10,-5 -8,-12 L-3,-10 Q-8,-3 -2,0 Z"/></g>
+        <g transform="translate(135, 38) scale(0.7)"><line class="plant-stem" x1="0" y1="18" x2="0" y2="-2"/><circle cx="0" cy="-5" r="3" fill="var(--theme-colza-primary-color, #FFEB3B)"/><circle cx="-4" cy="-8" r="3" fill="var(--theme-colza-primary-color, #FFEB3B)"/><circle cx="4" cy="-8" r="3" fill="var(--theme-colza-primary-color, #FFEB3B)"/><circle cx="0" cy="-11" r="3" fill="var(--theme-colza-primary-color, #FFEB3B)"/><path class="plant-leaf" d="M0,12 Q6,8 3,2 Q-3,6 0,12 Z" transform="rotate(10)"/></g>
+        <g transform="translate(165, 38) scale(0.75)"><path class="plant-leaf" d="M0,15 Q-10,5 -5,-5 Q0,-10 5,-5 Q10,5 0,15 Z"/><circle cx="-3" cy="0" r="1.5" fill="var(--theme-soja-primary-color, %23E1BEE7)"/><circle cx="3" cy="0" r="1.5" fill="var(--theme-soja-primary-color, %23E1BEE7)"/><circle cx="0" cy="-4" r="1.5" fill="var(--theme-soja-primary-color, %23E1BEE7)"/></g>
+    </svg>
+</div>
+
+<h1 style="text-align:center; margin-top:0;">Newtea</h1>
+
+<div id="session-setup">
+    <label data-i18n="notateur">Votre Nom / Notateur :</label>
+    <input type="text" id="type-notation-session" data-i18n-placeholder="notateur-placeholder" placeholder="Nom du notateur...">
+    <hr>
+    
+    <div class="qr-wrapper">
+        <button class="qr-btn" onclick="startQRScanner()" title="Scan Direct QR">📷</button>
+        <p>Direct QR Code</p>
+    </div>
+
+    <div class="setup-section">
+        <h3 data-i18n="h3-noter-existant">Noter un essai existant</h3>
+        <select id="choix-essai"></select>
+
+        <div id="protocol-selection-container" style="display:none; margin-top:10px; padding: 10px; border: 1px solid var(--theme-input-border-color); border-radius: 5px; background: rgba(0,0,0,0.02);">
+            <label style="margin-bottom: 5px; font-weight:bold; color:var(--theme-secondary-color);">Protocoles associés (filtre) :</label>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <button type="button" class="btn-secondary" style="margin:0; padding:5px 10px; font-size:0.8em;" onclick="selectAllProtocols(true)">Tout cocher</button>
+                <button type="button" class="btn-secondary" style="margin:0; padding:5px 10px; font-size:0.8em;" onclick="selectAllProtocols(false)">Tout décocher</button>
+            </div>
+            <div id="protocol-checkboxes" style="display:flex; flex-direction:column; gap:5px;"></div>
+        </div>
+
+        <button id="confirmer-essai" class="btn-primary btn-block" data-i18n="confirmer-noter">Confirmer l'essai</button>
+    </div>
+
+    <div class="setup-section">
+        <h3 data-i18n="h3-importer-essai">Importer un essai (CSV Base)</h3>
+        <input type="file" id="import-new-trial-csv" accept=".csv" style="border: 1px solid var(--theme-secondary-color);">
+        <p style="font-size:0.8em; color:#666; margin-top:0;" data-i18n="desc-import-base">Charge un CSV contenant la structure d'un essai pour l'ajouter à la base de données locale.</p>
+    </div>
+
+    <div class="setup-section">
+        <h3 data-i18n="h3-creer-essai">Créer un nouvel essai</h3>
+        <label data-i18n="nom-essai">Nom de l'essai :</label>
+        <input type="text" id="new-trial-name" data-i18n-placeholder="ph-nom-essai" placeholder="Ex: Essai_Rendement_2026">
+        
+        <label data-i18n="espece">Espèce :</label>
+        <select id="new-trial-espece">
+            <option value="Mais" data-i18n="Mais">Maïs</option>
+            <option value="Tournesol" data-i18n="Tournesol">Tournesol</option>
+            <option value="Colza" data-i18n="Colza">Colza</option>
+            <option value="Soja" data-i18n="Soja">Soja</option>
+            <option value="Sorgho" data-i18n="Sorgho">Sorgho</option>
+        </select>
+
+        <label data-i18n="protocole">Protocole global (Optionnel) :</label>
+        <input type="text" id="new-trial-protocole" placeholder="Ex: Proto_Rendement">
+        
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+                <label data-i18n="colonnes-x">Colonnes (X) :</label>
+                <input type="number" id="new-trial-x" min="1" placeholder="Ex: 5">
+            </div>
+            <div style="flex:1;">
+                <label data-i18n="lignes-y">Lignes (Y) :</label>
+                <input type="number" id="new-trial-y" min="1" placeholder="Ex: 10">
+            </div>
+        </div>
+        <button id="creer-essai" class="btn-accent btn-block" data-i18n="btn-creer-essai">Créer le plan et commencer</button>
+    </div>
+</div>
+
+<div id="app-container" style="display:none;">
+    <div class="tabs">
+        <button class="tablink active" onclick="openTab(event, 'Note')" id="defaultOpen" data-i18n="tab-Note">Note</button>
+        <button class="tablink" onclick="openTab(event, 'Configuration')" data-i18n="tab-Configuration">Config</button>
+    </div>
+
+    <div id="Note" class="tabcontent" style="display:block;">
+        <div id="app-content">
+            <div class="sidebar">
+                
+                <div class="progress-container">
+                    <div id="trial-progress-bar" class="progress-bar"></div>
+                    <div id="trial-progress-text" class="progress-text">0 / 0 (0%)</div>
+                </div>
+
+                <div class="selector-group"> 
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <h4 style="margin: 0;" data-i18n="num-parcelle">Entrée (Ent)</h4>
+                        <div class="mode-selection-line" style="display: flex; align-items: center; gap: 5px;">
+                            <label for="mode-avancement" style="width:auto; margin:0; font-size:0.8em; color:#666;" data-i18n="mode">Mode:</label>
+                            <select id="mode-avancement" onchange="generatePlotOrder()" style="width: auto; min-width: 70px; margin: 0; padding: 4px; font-size: 0.85em;">
+                                <option value="S">S</option>
+                                <option value="Z" selected>Z</option>
+                                <option value="U">U</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Mini-plan toujours visible à la place des boutons digit -->
+                    <div id="mini-plan-container"></div>
+                </div>
+
+              <div class="parcelle-navigation" style="display: flex; gap: 5px; justify-content: space-around; margin-top: 15px;">
+                  <button id="parcelle-precedente" class="btn-secondary" data-i18n="prec">← Préc.</button>
+                  <button id="valider-parcelle" class="btn-primary" data-i18n="valider">Valider Parcelle</button>
+                  <button id="parcelle-suivante" class="btn-primary" data-i18n="suiv">Suiv. →</button>
+                </div>
+                
+                <hr>
+                
+                <p id="variete-text" style="font-weight:bold; font-size:1.1em; color:var(--theme-heading-color); margin-bottom: 5px;"><span data-i18n="lignee">Nom / Variété :</span> </p>
+                <div class="espece-gps-line" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 10px; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <p id="espece-text" style="margin:0; color:var(--theme-secondary-color); font-weight:bold;"></p>
+                        <button id="voir-sur-carte" style="margin:0; padding:4px 8px; font-size:0.85em;"><b>GPS</b></button>
+                        <button id="voir-plan-semis" style="display:none; margin:0; padding:4px 8px; font-size:0.85em;" data-i18n="plan-semis">Plan de Semis</button>
+                    </div>
+                    
+                    <div class="input-inc-dec" style="margin:0; gap: 5px;">
+                        <label for="rep" style="width:auto; margin:0; font-size:0.85em;" data-i18n="rep">Rep :</label>
+                        <button type="button" id="minus-rep" class="btn-secondary cube-btn" style="width: 28px !important; height: 28px !important; font-size: 1.2em !important;">-</button>
+                        <input type="text" id="rep" value="A" maxlength="2" style="width: 35px !important; height: 28px !important; margin:0; padding:0; text-align: center; font-weight: bold;">
+                        <button type="button" id="plus-rep" class="btn-secondary cube-btn" style="width: 28px !important; height: 28px !important; font-size: 1.2em !important;">+</button>
+                    </div>
+                </div>
+
+                <hr>
+                
+                <div class="qr-wrapper" style="margin-top: 10px; margin-bottom: 15px;">
+                    <button class="qr-btn" onclick="startQRScanner()" title="Scan Direct QR">📷</button>
+                    <p style="font-size: 0.85em; margin-top:5px;">Scan Direct Parcelle</p>
+                </div>
+
+                <button id="btn-toggle-notations" class="btn-secondary btn-block" style="text-align:left; margin-top:5px;" data-i18n="menus">► MENUS (Ouvrir/Fermer)</button>
+                
+                <div id="central-notations-container" style="display:block; margin-top:10px;">
+                    <div id="notation-menu-row" class="not-buttons-row" style="display:none;">
+                        <button type="button" class="not-btn-choix" data-target="not-param" data-i18n="not-param" style="background-color:#d35400; color:white; font-weight:bold;">Param. Parc.</button>
+                        <button type="button" class="not-btn-choix" data-target="not-simple" data-i18n="not-diverses">Diverses</button>
+                        <button type="button" class="not-btn-choix" data-target="not-stade" data-i18n="not-stade">Stade</button>
+                        <button type="button" class="not-btn-choix" data-target="not-flo" data-i18n="not-flo">Flo</button>
+                        <button type="button" class="not-btn-choix" data-target="not-receptivite" data-i18n="not-receptivite">Récept.</button>
+                        <button type="button" class="not-btn-choix" data-target="not-prlvmt" data-i18n="not-prlvmt">Prlvmt</button>
+                    </div>
+
+                    <div id="not-param" class="notation-group-container hidden-section" style="border-left: 4px solid #d35400;">
+                        <div class="zen-title-wrapper">
+                            <h4 data-i18n="h4-param-parc">Paramètres de la Parcelle</h4>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <button type="button" class="btn-star" onclick="toggleZenMode('not-param')" title="Mode Plein Écran">⭐</button>
+                                <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()" data-i18n="suiv-valider">⏭ Suivant</button>
+                            </div>
+                        </div>
+                        <div class="param-grid-wrapper" style="display:flex; flex-direction:column; gap:10px;">
+                            <div>
+                                <label data-i18n="param-nom-var">Nom / Variété :</label>
+                                <input type="text" id="param-variete" style="margin:0;">
+                            </div>
+                            <div>
+                                <label data-i18n="param-type">Type de parcelle :</label>
+                                <select id="param-type" style="margin:0;">
+                                    <option value="">-- Vide --</option>
+                                    <option value="M">M (Mâle)</option>
+                                    <option value="F">F (Femelle)</option>
+                                    <option value="H">H (Hybride)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="not-stade" class="notation-group-container hidden-section">
+                        <div class="zen-title-wrapper">
+                            <label for="stade" data-i18n="stade-bbch">Stade (BBCH) :</label>
+                            <div style="display:flex; gap:5px; align-items:center;">
+                                <button type="button" class="btn-multi" onclick="openMultiSelectPlan('Stade', 'stade')" title="Saisie Groupée">🔲</button>
+                                <button type="button" class="btn-star" onclick="toggleZenMode('not-stade')" title="Mode Plein Écran">⭐</button>
+                                <button type="button" id="bbch-info-button" class="btn-secondary" data-i18n="btn-info" style="margin:0; padding:2px 8px; font-size:0.8em;">Info</button>
+                                <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()" data-i18n="suiv-valider">⏭ Suivant</button>
+                            </div>
+                        </div>
+                        <div class="input-inc-dec">
+                            <button type="button" id="minus-stade" class="btn-secondary cube-btn">-</button>
+                            <input type="text" id="stade" placeholder="ex: 65">
+                            <button type="button" id="plus-stade" class="btn-secondary cube-btn">+</button>
+                        </div>
+                    </div>
+
+                    <div id="not-flo" class="notation-group-container hidden-section">
+                        <div class="zen-title-wrapper">
+                            <h4><span data-i18n="taux-flo">Taux de floraison (%)</span> <span id="flo-display">0</span></h4>
+                            <div style="display:flex; gap:5px; align-items:center;">
+                                <button type="button" class="btn-multi" onclick="openMultiSelectPlan('Floraison', 'flo-display')" title="Saisie Groupée">🔲</button>
+                                <button type="button" class="btn-star" onclick="toggleZenMode('not-flo')" title="Mode Plein Écran">⭐</button>
+                                <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()" data-i18n="suiv-valider">⏭ Suivant</button>
+                            </div>
+                        </div>
+                        <div id="flo-buttons" class="square-btn-group"></div>
+                    </div>
+                    
+                    <div id="not-receptivite" class="notation-group-container hidden-section">
+                         <div class="zen-title-wrapper">
+                             <h4 data-i18n="receptivite-label">Réceptivité (Nb)</h4>
+                             <div style="display:flex; gap:5px; align-items:center;">
+                                 <button type="button" class="btn-multi" onclick="openMultiSelectPlan('Receptivite', 'receptivite')" title="Saisie Groupée">🔲</button>
+                                 <button type="button" class="btn-star" onclick="toggleZenMode('not-receptivite')" title="Mode Plein Écran">⭐</button>
+                                 <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()" data-i18n="suiv-valider">⏭ Suivant</button>
+                             </div>
+                         </div>
+                         <div class="input-group-big">
+                             <button type="button" id="minus-receptivite" class="btn-secondary cube-btn">-</button>
+                             <div class="input-wrapper-relative">
+                                 <input type="number" id="receptivite" class="input-big-text" placeholder="0">
+                                 <span id="clear-receptivite" class="clear-icon-inside">×</span>
+                             </div>
+                             <button type="button" id="plus-receptivite" class="btn-secondary cube-btn">+</button>
+                         </div>
+                    </div>
+
+                    <div id="not-prlvmt" class="notation-group-container hidden-section">
+                        <div class="zen-title-wrapper">
+                            <h4 data-i18n="prelevements">Prélèvements / Échantillons</h4>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <button type="button" class="btn-star" onclick="toggleZenMode('not-prlvmt')" title="Mode Plein Écran">⭐</button>
+                                <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()" data-i18n="suiv-valider">⏭ Suivant</button>
+                            </div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;">
+                            <label style="width:auto; margin:0;" data-i18n="code">Code:</label>
+                            <input type="text" id="lettres-analyse" size="5" placeholder="AAA" style="width:60px !important; margin:0;">
+                            <input type="number" id="numero-analyse" value="1" min="1" style="width:60px !important; margin:0;">
+                            <button type="button" id="minus-analyse" class="btn-secondary cube-btn" style="margin:0;">-</button>
+                            <button type="button" id="plus-analyse" class="btn-secondary cube-btn" style="margin:0;">+</button>
+                        </div>
+                    </div>
+
+                    <div id="not-simple" class="notation-group-container hidden-section">
+                        <div id="simple-notations-list"></div>
+                        <button id="btn-add-simple-line" class="btn-secondary btn-block" style="font-size:0.8em;" data-i18n="ajouter-ligne">+ Ajouter ligne</button>
+                    </div>
+                </div>
+                
+                <hr>
+                <div style="position: relative; margin-top: 15px;">
+                    <label for="obs" data-i18n="observations">Observations:</label>
+                    <textarea id="obs" rows="2" style="padding-right: 40px;"></textarea>
+                    <span id="clear-obs" style="position: absolute; right: 10px; top: 35px; cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 1.2em; display: none;">×</span>
+                    <div id="mic-btn" class="mic-btn" style="bottom: auto; top:35px;" onclick="toggleDictation()">🎤</div>
+                </div>
+
+                <div id="save-buttons-placeholder">
+                    <div class="save-buttons-container" id="main-save-buttons">
+                        <button id="enregistrer-prec" class="btn-accent" data-i18n="enregistrer-prec">← Enr. Préc.</button>
+                        <button id="enregistrer" class="btn-primary" data-i18n="enregistrer">Enregistrer</button>
+                        <button id="enregistrer-suivant" class="btn-accent" data-i18n="enregistrer-suivant">Enr. Suiv. →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-panel">
+                <h4 data-i18n="derniers-enregistrements">Derniers enregistrements</h4>
+                <div style="overflow-x:auto;">
+                    <table id="recap-table" style="width:100%; border-collapse:collapse;">
+                        <thead><tr style="background:#eee; text-align:left;"><th data-i18n="th-essai" style="padding:5px;">Essai</th><th data-i18n="th-parc" style="padding:5px;">Ent</th><th data-i18n="th-rep" style="padding:5px;">Rep</th><th data-i18n="th-code" style="padding:5px;">Code Ech.</th><th data-i18n="th-stade" style="padding:5px;">Stade</th><th data-i18n="th-flo" style="padding:5px;">Flo%</th><th data-i18n="th-act" style="padding:5px;">Act.</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Configuration" class="tabcontent">
+        <label data-i18n="choix-langue">Langue :</label>
+        <select id="lang-select">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="pl">Polski</option>
+            <option value="ro">Română</option>
+            <option value="uk">Українська</option>
+        </select>
+
+        <div style="display:flex; align-items:center; margin-top:15px; margin-bottom:15px;">
+            <label style="width:auto; margin:0 10px 0 0;" data-i18n="mode-sombre">Mode Sombre :</label>
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <hr>
+        <button id="changer-essai" class="btn-secondary btn-block" data-i18n="changer-essai">Retour Menu / Changer d'essai</button>
+        <hr>
+        <label data-i18n="date-obs">Date Obs :</label><input type="date" id="custom-date">
+        <label data-i18n="heure-obs">Heure :</label><input type="time" id="custom-time">
+        <hr>
+        <label data-i18n="meteo">Météo (Condition) :</label>
+        <select id="meteo-select">
+            <option value="Soleil" data-i18n="meteo-soleil">Soleil</option>
+            <option value="Eclaircies" data-i18n="meteo-eclaircies">Eclaircies</option>
+            <option value="Nuageux" data-i18n="meteo-nuageux">Nuageux</option>
+            <option value="Couvert" data-i18n="meteo-couvert">Couvert</option>
+            <option value="Vent" data-i18n="meteo-vent">Vent</option>
+            <option value="Pluie" data-i18n="meteo-pluie">Pluie</option>
+        </select>
+        
+        <hr>
+        <label style="color:#d35400; font-weight:bold;" data-i18n="label-import">Overlay Interactif (Session uniquement) :</label>
+        <input type="file" id="import-external-csv" accept=".csv" style="border: 1px solid #d35400;">
+        <p style="font-size:0.8em; color:#666;" data-i18n="desc-import">Superpose les données sur le plan. Ne modifie pas la base des essais.</p>
+
+        <hr>
+        <h3 data-i18n="h3-gestion-donnees" style="color:#c0392b;">Gestion des données</h3>
+        <button id="partager-csv" class="btn-primary btn-block" style="margin-bottom:10px; background-color: #2980b9;">📥/📤 Sauvegarder CSV, Partager & Purger</button>
+        <button id="telecharger-plan-csv" class="btn-accent btn-block" style="margin-bottom:10px;">📥/📤 Sauvegarder Plan Essai</button>
+        <button id="reset-data-local" class="btn-danger btn-block" style="margin-bottom:10px;" data-i18n="reset-donnees">⚠️ Reset Données (Purger les Notes)</button>
+        <button id="reset-base-essais" class="btn-danger btn-block" style="background-color:#900;" data-i18n="reset-base">⚠️ Reset Base Essais (Purger tous les plans)</button>
+    </div>
+</div>
+
+<div id="gpsChoiceModal" class="modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <h3 data-i18n="h3-gps-options">Options GPS</h3>
+        <p id="gps-status-text" style="color:#666; font-style:italic;"></p>
+        <button id="btn-gps-aller" class="btn-primary btn-block" style="margin-bottom:10px;" data-i18n="btn-gps-aller">🗺️ Aller vers cet essai</button>
+        <button id="btn-gps-definir" class="btn-accent btn-block" style="margin-bottom:10px;" data-i18n="btn-gps-definir">📍 Définir la position ici</button>
+        <button onclick="document.getElementById('gpsChoiceModal').style.display='none'" class="btn-secondary btn-block" data-i18n="btn-cancel">Annuler</button>
+    </div>
+</div>
+
+<div id="choiceSimpleNotModal" class="modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <h3 data-i18n="prompt-title-simple">Type de notation</h3>
+        <input type="text" id="new-simple-title-modal" placeholder="Ex: Date Floraison">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:20px;">
+            <button id="btn-choice-num" class="btn-primary" data-i18n="btn-choice-num">123 (Num)</button>
+            <button id="btn-choice-text" class="btn-accent" data-i18n="btn-choice-text">ABC (Txt)</button>
+            <button id="btn-choice-percent" class="btn-secondary" style="background-color: #f1c40f; color: #333;" data-i18n="btn-choice-percent">% (5-100)</button>
+            <button id="btn-choice-date" class="btn-secondary" style="background-color: #9b59b6; color: white;" data-i18n="btn-choice-date">📅 Date</button>
+            <button id="btn-choice-scale" class="btn-accent" style="background-color: #e67e22; color: white; grid-column: span 2;" data-i18n="btn-choice-scale">1-9 (Échelle)</button>
+            <button id="btn-choice-photo" class="btn-primary" style="background-color: #34495e; color: white; grid-column: span 2;" data-i18n="btn-choice-photo">📷 Photo</button>
+        </div>
+        <button onclick="document.getElementById('choiceSimpleNotModal').style.display='none'" class="btn-secondary btn-block" style="margin-top:20px;" data-i18n="btn-cancel">Annuler</button>
+    </div>
+</div>
+
+<!-- Modal Scanner QR Code -->
+<div id="qrScannerModal" class="modal" style="z-index: 100001;">
+    <div class="modal-content" style="text-align: center; max-width: 500px; padding: 15px;">
+        <h3 style="color: #e67e22;">Scanner QR Code Parcelle</h3>
+        <p style="font-size:0.8em; color:#666; margin-bottom: 10px;">Scannez pour valider automatiquement la parcelle.</p>
+        <div id="qr-reader" style="width: 100%; border-radius: 8px; overflow: hidden; border: 2px solid #ddd;"></div>
+        <button onclick="stopQRScanner()" class="btn-danger btn-block" style="margin-top: 15px;">Fermer la caméra</button>
+    </div>
+</div>
+
+<!-- Modal Stades BBCH -->
+<div id="bbchModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeBbchModal" style="float:right; font-size:24px; cursor:pointer;">×</span>
+        <h2 data-i18n="h2-bbch">Stades BBCH</h2>
+        <div id="bbch-modal-body"></div>
+    </div>
+</div>
+
+<div id="sowingPlanModal" class="modal" style="z-index: 100000;">
+    <div class="modal-content" style="padding: 10px;"> 
+        <span class="close-button" id="closeSowingPlanModal" style="float:right; font-size:24px; cursor:pointer;">×</span>
+        <div style="display:flex; flex-direction:column; justify-content:flex-start;">
+            <h2 id="plan-modal-title" data-i18n="h2-plan" style="margin-bottom:10px;">Plan de Semis</h2>
+            
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:10px; background:#eee; padding:5px; border-radius:5px; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center;">
+                    <label style="font-size:0.8em; margin:0 5px 0 0; font-weight:bold; color:#333;" data-i18n="avancement-hachure">Avancement (Hachuré) :</label>
+                    <label class="switch" style="transform:scale(0.8);">
+                        <input type="checkbox" id="todo-mode-toggle" onchange="openSowingPlan(); renderMiniPlan();" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div style="display:flex; align-items:center;">
+                    <label style="font-size:0.8em; margin:0 5px 0 0; font-weight:bold; color:#333;" data-i18n="deplacement-fleches">Déplacement (Flèches) :</label>
+                    <label class="switch" style="transform:scale(0.8);">
+                        <input type="checkbox" id="path-mode-toggle" onchange="openSowingPlan(); renderMiniPlan();">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="plan-interactive-controls" class="interactive-controls">
+                <div style="display:flex; align-items:center;">
+                    <span class="interactive-label" data-i18n="interactif">INTERACTIF</span>
+                    <label class="switch">
+                        <input type="checkbox" id="interactive-mode-toggle" onchange="openSowingPlan(); renderMiniPlan();">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div id="interactive-filters" style="display:none; flex-grow:1; gap:10px; align-items:center; flex-wrap:wrap;">
+                    <div style="flex-grow:1;">
+                        <label style="font-size:0.8em; margin:0; color:#333;" data-i18n="donnee">Donnée :</label>
+                        <select id="interactive-data-select" style="margin:0; padding:4px;" onchange="openSowingPlan(); renderMiniPlan();"></select>
+                    </div>
+                    <div style="flex-grow:1;">
+                        <label style="font-size:0.8em; margin:0; color:#333;" data-i18n="filter-notateur">Notateur :</label>
+                        <select id="interactive-notator-select" style="margin:0; padding:4px;" onchange="openSowingPlan(); renderMiniPlan();">
+                            <option value="" data-i18n="option-tous">Tous</option>
+                        </select>
+                    </div>
+                    <div style="width:120px;">
+                        <label style="font-size:0.8em; margin:0; color:#333;" data-i18n="jours-max">Jours max (Hier: 1) :</label>
+                        <input type="number" id="interactive-days-input" value="10" min="0" style="margin:0; padding:4px;" onchange="openSowingPlan(); renderMiniPlan();">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="sowing-plan-grid-container"></div>
+
+        <div id="multi-select-action-bar" style="display:none; padding:15px; margin-top:15px; background:var(--theme-secondary-color); border-radius:8px; text-align:center;">
+            <p id="multi-select-status" style="color:white; font-weight:bold; margin-top:0;">0 parcelle(s) sélectionnée(s)</p>
+            <button onclick="applyMultiSelect()" style="background-color:white; color:var(--theme-secondary-color); padding:10px 20px; font-weight:bold; width:100%; border-radius:5px;" data-i18n="btn-appliquer-groupe">Appliquer à la sélection</button>
+        </div>
+    </div>
+</div>
+
+<div id="zen-overlay" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100%; height:100%; background:var(--theme-background-color); flex-direction:column; padding:15px; box-sizing:border-box;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+            <h1 id="zen-title" style="margin:0; font-size:3.5em; color:var(--theme-heading-color); line-height:1;">P001</h1>
+            <h2 id="zen-subtitle" style="margin:5px 0 0 0; font-size:1.8em; color:#555;">Variété</h2>
+            <h3 id="zen-rep" style="margin:5px 0 0 0; font-size:1.5em; color:var(--theme-primary-color);">Rep : A</h3>
+            <h4 id="zen-interactive-preview" style="margin:10px 0 0 0; font-size:1.3em; color:#d35400; display:none; background:#fdfdfd; padding:4px 8px; border-radius:4px; border:1px solid #d35400;"></h4>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <button onclick="exitZenMode()" class="btn-danger" style="margin:0; font-size:1.2em; padding:15px; border-radius:15px;" data-i18n="btn-quitter">❌ Quitter</button>
+        </div>
+    </div>
+    <hr style="width:100%; margin:20px 0; border: 1px solid #ccc;">
+    <div id="zen-content"></div>
+    <div id="zen-save-buttons-container" style="padding-bottom: 20px;"></div>
+</div>
+
+<!-- Inclusion du fichier de traduction -->
+<script src="translations.js"></script>
+
+<script>
+// --- Système de Traductions ---
+function applyTranslations(lang) {
+    if (typeof translations === 'undefined') {
+        console.warn("⚠️ 'translations.js' non trouvé.");
+        return;
+    }
+    if(!translations[lang]) lang = 'fr';
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (translations[lang] && translations[lang][key]) el.placeholder = translations[lang][key];
+    });
+    localStorage.setItem('selected_lang', lang);
+}
+
+function getT(key) {
+    if (typeof translations === 'undefined') return key;
+    const lang = document.getElementById('lang-select').value;
+    return translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+}
+
+// --- Données initiales modifiées (Ent + Protocole + uuid) ---
+const rawCsvData = `Ent,variete,Essai,Espece,Gps,Plan_X,Plan_Y,Type,Protocole
+1,LID 5053L SU,Test,Tournesol,"43.69,1.27",1,1,H,Proto_A
+2,MYLADY,Test,Mais,"43.47,-0.34",2,1,F,Proto_A
+3,LID PANDORE,Test,Sorgho,"41.75,-0.79",3,1,M,Proto_B
+4,ISIDOR,Test,Soja,"43.65,1.65",1,2,F,
+5,LID TRETO,Test,Colza,"44.39,1.39",2,2,H,Proto_B
+6,LID 5053L SU,Test,Tournesol,"0.0,0.0",3,2,M,Proto_A
+7,ISIDOR,Test,Soja,"0.0,0.0",1,3,M,Proto_B
+8,MYLADY,Test,Mais,"0.0,0.0",2,3,F,
+9,LID TRETO,Test,Colza,"0.0,0.0",3,3,H,Proto_A
+10,LID PANDORE,Test,Sorgho,"41.75,-0.79",5,6,M,Proto_C`;
+
+let varieteData = [], appObservations = [], simpleNotationsConfig = [];
+let externalData = []; 
+let currentEssai = null, currentEspece = null, currentGps = null;
+let currentDigitCount = 3;
+
+// Gestion UUID et Multi-Select
+let selectedPlotUuid = null;
+let parcelleValideeUuid = null;
+let currentPlotOrder = []; // Array of UUIDs
+let selectedProtocoles = []; 
+let isMultiSelectMode = false;
+let multiSelectTargetKey = null;
+let multiSelectTargetValue = null;
+let multiSelectedPlots = new Set();
+let isSaving = false;
+let audioCtx = null;
+let html5QrcodeScanner = null; // Scanner QR
+
+function generateUUID() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+function playSuccessSound() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.type = 'sine'; osc.frequency.setValueAtTime(1000, audioCtx.currentTime); 
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime); 
+        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1); 
+        osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+    } catch(e) { console.log(e); }
+}
+
+function parseCSVToObjects(csvString, delimiter = ';') {
+    const lines = csvString.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    let sep = delimiter;
+    if (lines[0].indexOf(sep) === -1) { sep = lines[0].indexOf(',') > -1 ? ',' : ';'; }
+    
+    const regex = new RegExp(`${sep}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
+    const cleanVal = (val) => {
+        if (!val) return "";
+        val = val.trim();
+        if (val.startsWith('"') && val.endsWith('"')) val = val.substring(1, val.length - 1);
+        return val;
+    };
+
+    const headers = lines[0].split(regex).map(cleanVal);
+    const objects = [];
+    for (let i = 1; i < lines.length; i++) {
+        const currentline = lines[i].split(regex);
+        if(currentline.length >= 1 && lines[i].trim() !== "") {
+            const obj = {};
+            headers.forEach((h, idx) => { obj[h] = cleanVal(currentline[idx]); });
+            if(!obj._uuid) obj._uuid = generateUUID(); // Assign UUID
+            objects.push(obj);
+        }
+    }
+    return objects;
+}
+
+function loadVarieteDataLocal() {
+    const saved = localStorage.getItem('newtea_trials');
+    const defaultTestTrial = parseCSVToObjects(rawCsvData, ',');
+    
+    if (saved) {
+        varieteData = JSON.parse(saved);
+        varieteData.forEach(p => { if(!p._uuid) p._uuid = generateUUID(); });
+        if (!varieteData.some(p => p.Essai === 'Test')) {
+            varieteData = defaultTestTrial.concat(varieteData);
+            saveVarieteDataLocal();
+        }
+    } else {
+        varieteData = defaultTestTrial;
+        saveVarieteDataLocal();
+    }
+}
+function saveVarieteDataLocal() { localStorage.setItem('newtea_trials', JSON.stringify(varieteData)); }
+
+function toggleDarkMode() {
+    const isDark = document.getElementById('dark-mode-toggle').checked;
+    if (isDark) { document.body.classList.add('dark-mode'); localStorage.setItem('newtea_dark_mode', 'true'); } 
+    else { document.body.classList.remove('dark-mode'); localStorage.setItem('newtea_dark_mode', 'false'); }
+}
+
+// =================== QR CODE LOGIC ===================
+window.startQRScanner = () => {
+    document.getElementById('qrScannerModal').style.display = 'block';
+    if (!html5QrcodeScanner) html5QrcodeScanner = new Html5Qrcode("qr-reader");
+    
+    html5QrcodeScanner.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => handleQRScanSuccess(decodedText),
+        (errorMessage) => {}
+    ).catch(err => {
+        alert("Erreur d'accès à la caméra. Vérifiez les permissions.");
+        document.getElementById('qrScannerModal').style.display = 'none';
+    });
+};
+
+window.stopQRScanner = () => {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.stop().then(() => document.getElementById('qrScannerModal').style.display = 'none')
+        .catch(err => document.getElementById('qrScannerModal').style.display = 'none');
+    } else { document.getElementById('qrScannerModal').style.display = 'none'; }
+};
+
+function handleQRScanSuccess(decodedText) {
+    stopQRScanner();
+    const lieuMatch = decodedText.match(/LIEU\s*:\s*([^,\n\r]+)/i);
+    const xMatch = decodedText.match(/X\s*=\s*(\d+)/i);
+    const yMatch = decodedText.match(/Y\s*=\s*(\d+)/i);
+
+    if (lieuMatch && xMatch && yMatch) {
+        const essai = lieuMatch[1].trim();
+        const x = parseInt(xMatch[1].trim());
+        const y = parseInt(yMatch[1].trim());
+
+        const plot = varieteData.find(p => p.Essai === essai && parseInt(p.Plan_X) === x && parseInt(p.Plan_Y) === y);
+
+        if (plot) {
+            playSuccessSound();
+            if (currentEssai !== essai) {
+                document.getElementById('choix-essai').value = essai;
+                document.getElementById('choix-essai').dispatchEvent(new Event('change'));
+                selectAllProtocols(true);
+                document.getElementById('confirmer-essai').click();
+            }
+
+            document.querySelectorAll('.tabcontent').forEach(x=>x.style.display='none');
+            document.querySelectorAll('.tablink').forEach(x=>x.classList.remove('active'));
+            document.getElementById('Note').style.display='block';
+            document.getElementById('defaultOpen').classList.add('active');
+
+            selectedPlotUuid = plot._uuid;
+            updateUIForSelectedPlot(selectedPlotUuid);
+
+            parcelleValideeUuid = selectedPlotUuid;
+            document.getElementById('valider-parcelle').style.display = 'none';
+            document.getElementById('rep').value = 'A';
+            
+            const notationArea = document.getElementById('central-notations-container');
+            const obsArea = document.getElementById('obs').parentNode;
+            const saveArea = document.getElementById('save-buttons-placeholder');
+            [notationArea, obsArea, saveArea].forEach(el => {
+                if(el) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; }
+            });
+        } else {
+            alert(`Parcelle introuvable pour l'essai "${essai}" (X: ${x}, Y: ${y})`);
+        }
+    } else {
+        alert("Format QR Code invalide. Attendu:\nLIEU : Test\nY= 1\nX = 2");
+    }
+}
+// =====================================================
+
+// =================== INTERACTIVE OVERLAY & MINI PLAN ===================
+window.populateInteractiveFilters = () => {
+    if (!externalData || externalData.length === 0) return;
+    const dataSelect = document.getElementById('interactive-data-select');
+    const notatorSelect = document.getElementById('interactive-notator-select');
+    
+    if(dataSelect && dataSelect.options.length === 0) {
+         const fixed = ["ESSAI", "Ent", "Variete", "Date", "Heure", "Meteo", "Rep", "Code_Ech", "Observations", "Protocole"];
+         const keys = Object.keys(externalData[0]).filter(k => !fixed.includes(k) && k !== 'id');
+         keys.sort().forEach(k => {
+             const opt = document.createElement('option'); opt.value = k; opt.text = k.startsWith('Not_') ? k.substring(4) : k; dataSelect.appendChild(opt);
+         });
+    }
+    if(notatorSelect && notatorSelect.options.length <= 1) {
+        const notateurs = [...new Set(externalData.map(d => d.Notateur).filter(n => n))].sort();
+        notateurs.forEach(n => { const opt = document.createElement('option'); opt.value = n; opt.text = n; notatorSelect.appendChild(opt); });
+    }
+};
+
+window.renderMiniPlan = () => {
+    const container = document.getElementById('mini-plan-container');
+    if (!container) return;
+    if (!currentEssai) { container.innerHTML = '<p style="text-align:center; padding:10px; color:#666;">Aucun essai sélectionné.</p>'; return; }
+    
+    const plots = varieteData.filter(p => p.Essai === currentEssai);
+    if (!plots.length || !plots[0].Plan_X) { container.innerHTML = '<p style="text-align:center; padding:10px; color:#666;">Aucun plan de semis (X/Y) enregistré.</p>'; return; }
+
+    const currentPlot = plots.find(p => p._uuid === selectedPlotUuid);
+    let curX = currentPlot ? parseInt(currentPlot.Plan_X) : 1;
+    let curY = currentPlot ? parseInt(currentPlot.Plan_Y) : 1;
+
+    let minX = Math.min(...plots.map(p => parseInt(p.Plan_X)));
+    let maxX = Math.max(...plots.map(p => parseInt(p.Plan_X)));
+    let minY = Math.min(...plots.map(p => parseInt(p.Plan_Y)));
+    let maxY = Math.max(...plots.map(p => parseInt(p.Plan_Y)));
+
+    let startX = Math.max(minX, curX - 3), endX = Math.min(maxX, startX + 7);
+    if (endX - startX < 7) startX = Math.max(minX, endX - 7);
+    let startY = Math.max(minY, curY - 1), endY = Math.min(maxY, startY + 2);
+    if (endY - startY < 2) startY = Math.max(minY, endY - 2);
+
+    const isInteractive = document.getElementById('interactive-mode-toggle')?.checked;
+    const selectedDataKey = document.getElementById('interactive-data-select')?.value;
+    const notatorSelect = document.getElementById('interactive-notator-select')?.value;
+    const maxDays = parseInt(document.getElementById('interactive-days-input')?.value) || 0;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const todoMode = document.getElementById('todo-mode-toggle')?.checked !== false;
+
+    let minVal = Infinity, maxVal = -Infinity;
+    if(isInteractive && selectedDataKey && externalData) {
+         externalData.forEach(d => {
+             if(d.ESSAI !== currentEssai) return;
+             let val = d[selectedDataKey];
+             if (val !== undefined && val !== null && String(val).trim() !== "") {
+                 if(!isNaN(parseFloat(val.replace('%','')))) {
+                     let num = parseFloat(val.replace('%',''));
+                     if(num < minVal) minVal = num;
+                     if(num > maxVal) maxVal = num;
+                 }
+             }
+         });
+    }
+
+    let html = `<table id="mini-plan-table"><tbody>`;
+    for(let r = endY; r >= startY; r--) {
+        html += `<tr><td style="background-color: var(--theme-secondary-color); color: white; font-weight: bold; position: sticky; left: 0; z-index: 5;">${r}</td>`;
+        for(let c = startX; c <= endX; c++) {
+            const p = plots.find(plot => parseInt(plot.Plan_X) === c && parseInt(plot.Plan_Y) === r);
+            let classes = ["mini-cell"];
+            let onClickAttr = ""; let cellContent = "";
+
+            if (p) {
+                const isSelectedProtocol = selectedProtocoles.includes(p.Protocole || "Sans protocole");
+                if (!isSelectedProtocol) {
+                    classes.push('plot-disabled');
+                } else {
+                    onClickAttr = `onclick="selectFromPlan('${p._uuid}')"`;
+                }
+
+                let displayContent = p.Type ? p.Type : '';
+                let heatmapColor = "";
+
+                if (p.Type === 'M') classes.push('type-M');
+                else if (p.Type === 'F') classes.push('type-F');
+                else if (p.Type === 'H') classes.push('type-H');
+
+                if (p._uuid === selectedPlotUuid) classes.push("mini-selected");
+
+                if (todoMode) {
+                    const isDone = appObservations.some(obs => String(obs.Ent).padStart(currentDigitCount,'0') === String(p.Ent).padStart(currentDigitCount,'0') && obs.ESSAI === currentEssai);
+                    if(isDone) classes.push('hatched-pattern');
+                }
+
+                if (isInteractive && selectedDataKey) {
+                    let matches = externalData.filter(d => d.ESSAI === currentEssai && String(d.Ent).padStart(currentDigitCount,'0') === String(p.Ent).padStart(currentDigitCount,'0'));
+                    if (notatorSelect && notatorSelect !== "") matches = matches.filter(d => d.Notateur === notatorSelect);
+                    
+                    const recentMatches = matches.filter(d => {
+                        if(!d.Date) return false;
+                        const obsDate = new Date(d.Date); obsDate.setHours(0,0,0,0);
+                        return Math.ceil(Math.abs(today - obsDate) / (86400000)) <= maxDays;
+                    });
+                    
+                    const validMatches = recentMatches.filter(d => d[selectedDataKey] !== undefined && d[selectedDataKey] !== null && String(d[selectedDataKey]).trim() !== "");
+                    validMatches.sort((a,b) => { const dA = new Date(a.Date+(a.Heure?"T"+a.Heure:"")); const dB = new Date(b.Date+(b.Heure?"T"+b.Heure:"")); return dB - dA; });
+
+                    if(validMatches.length > 0) {
+                        let val = validMatches[0][selectedDataKey];
+                        if(val !== undefined && val !== "") {
+                             if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) { val = val.split('-')[2]+"/"+val.split('-')[1]; }
+                             if(!isNaN(parseFloat(val.replace('%',''))) && maxVal > minVal) {
+                                 let num = parseFloat(val.replace('%',''));
+                                 let ratio = (num - minVal) / (maxVal - minVal);
+                                 let hue = ratio * 120; 
+                                 heatmapColor = `background-color: hsl(${hue}, 80%, 80%); border: 1px solid hsl(${hue}, 80%, 40%);`;
+                             }
+                             displayContent = `<span class="interactive-val" style="${heatmapColor} font-size:0.9em; padding:1px; line-height:1;">${val}</span>`;
+                        } else { displayContent = `<span style="opacity:0.3">-</span>`; }
+                    } else { displayContent = `<span style="opacity:0.3">-</span>`; }
+                }
+
+                cellContent = `${parseInt(p.Ent || 0)}<br><span style="font-size:0.75em; position:relative; z-index:2; display:block; margin-top:2px;">${displayContent}</span>`;
+            }
+
+            html += `<td class="${classes.join(' ')}" ${onClickAttr}>${cellContent}</td>`;
+        }
+        html += `</tr>`;
+    }
+    
+    html += `<tr><th style="background-color: var(--theme-secondary-color); color: white; font-weight: bold; position: sticky; bottom: 0; left: 0; z-index: 6;">Y\\X</th>`;
+    for(let c = startX; c <= endX; c++) html += `<th style="background-color: var(--theme-secondary-color); color: white; font-weight: bold; position: sticky; bottom: 0; z-index: 4;">${c}</th>`;
+    html += `</tr></tbody></table>`;
+    
+    container.innerHTML = html;
+};
+
+window.selectFromPlan = (uuid) => {
+    selectedPlotUuid = uuid;
+    updateUIForSelectedPlot(selectedPlotUuid);
+    parcelleValideeUuid = null;
+    document.getElementById('valider-parcelle').style.display = 'block';
+    
+    const notationArea = document.getElementById('central-notations-container');
+    const obsArea = document.getElementById('obs').parentNode;
+    const saveArea = document.getElementById('save-buttons-placeholder');
+    [notationArea, obsArea, saveArea].forEach(el => {
+        if(el) { el.style.opacity = '0.4'; el.style.pointerEvents = 'none'; }
+    });
+    
+    const modal = document.getElementById('sowingPlanModal');
+    if(modal) modal.style.display = 'none';
+};
+
+// =================== RAPPEL SAUVEGARDE ===================
+function checkUnsavedReminder() {
+    if (appObservations.length > 50) {
+        let latest = 0;
+        appObservations.forEach(o => {
+            let d = new Date(o.Date + (o.Heure ? "T" + o.Heure : "T00:00:00")).getTime();
+            if(!isNaN(d) && d > latest) latest = d;
+        });
+        if (latest > 0 && (Date.now() - latest > 86400000)) { 
+            setTimeout(() => {
+                if (confirm(`Vous avez ${appObservations.length} notations non exportées depuis plus d'un jour. Voulez-vous télécharger le fichier CSV de sauvegarde maintenant ?`)) {
+                    telechargerCSV();
+                }
+            }, 1000);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selected_lang') || 'fr';
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) langSelect.value = savedLang;
+    applyTranslations(savedLang);
+
+    if (localStorage.getItem('newtea_dark_mode') === 'true') {
+        document.getElementById('dark-mode-toggle').checked = true;
+        document.body.classList.add('dark-mode');
+    }
+
+    loadVarieteDataLocal();
+    initEssaiSelector();
+    loadLocalObservations();
+    setupEventListeners();
+
+    const now = new Date();
+    document.getElementById('custom-date').valueAsDate = now;
+    document.getElementById('btn-choice-date').onclick = () => addSimpleLine('date');
+    document.getElementById('btn-choice-scale').onclick = () => addSimpleLine('scale19');
+    document.getElementById('btn-choice-photo').onclick = () => addSimpleLine('photo');
+    document.getElementById('custom-time').value = now.toTimeString().substring(0,5);
+
+    document.getElementById('import-external-csv').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            try {
+                let content = evt.target.result;
+                let sep = ';';
+                if (content.split('\n')[0].indexOf(';') === -1 && content.split('\n')[0].indexOf(',') > -1) sep = ',';
+                externalData = parseCSVToObjects(content, sep);
+                if (externalData.length > 0) {
+                    populateInteractiveFilters();
+                    renderMiniPlan();
+                    alert(getT('alert-import-success').replace('{n}', externalData.length));
+                } else alert(getT('alert-import-empty'));
+            } catch (err) { alert(getT('alert-import-error')); console.error(err); }
+        };
+        reader.readAsText(file);
+    });
+
+    document.getElementById('import-new-trial-csv').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            try {
+                let content = evt.target.result;
+                let sep = ';';
+                if (content.split('\n')[0].indexOf(';') === -1 && content.split('\n')[0].indexOf(',') > -1) sep = ',';
+                const newData = parseCSVToObjects(content, sep);
+                if (newData.length > 0) {
+                    varieteData = varieteData.concat(newData);
+                    saveVarieteDataLocal();
+                    initEssaiSelector();
+                    alert("Import OK: " + newData.length + " lignes ajoutées.");
+                } else alert("Aucune donnée trouvée.");
+            } catch (err) { alert("Erreur lecture CSV."); }
+        };
+        reader.readAsText(file);
+    });
+
+    document.getElementById('creer-essai').addEventListener('click', () => {
+        let name = document.getElementById('new-trial-name').value.trim();
+        let esp = document.getElementById('new-trial-espece').value;
+        let proto = document.getElementById('new-trial-protocole').value.trim();
+        let maxX = parseInt(document.getElementById('new-trial-x').value);
+        let maxY = parseInt(document.getElementById('new-trial-y').value);
+
+        if(!name || isNaN(maxX) || isNaN(maxY) || maxX <= 0 || maxY <= 0) return alert("Veuillez remplir correctement les infos.");
+
+        let counter = 1; let newPlots = [];
+        for(let y=1; y<=maxY; y++) {
+            for(let x=1; x<=maxX; x++) {
+                newPlots.push({
+                    _uuid: generateUUID(), Ent: counter++, variete: `Y${y}-X${x}`, Essai: name, Espece: esp, Gps: "", Plan_X: x, Plan_Y: y, Type: "", Protocole: proto
+                });
+            }
+        }
+        varieteData = varieteData.concat(newPlots);
+        saveVarieteDataLocal(); initEssaiSelector();
+        document.getElementById('choix-essai').value = name;
+        document.getElementById('choix-essai').dispatchEvent(new Event('change'));
+        document.getElementById('confirmer-essai').click();
+    });
+
+    window.addEventListener('resize', () => {
+        if(document.getElementById('sowingPlanModal').style.display === 'block') {
+            const pathToggle = document.getElementById('path-mode-toggle');
+            if (pathToggle && pathToggle.checked && !isMultiSelectMode) {
+                window.drawMovementPath();
+            }
+        }
+    });
+
+    checkUnsavedReminder();
+});
+
+window.selectAllProtocols = (check) => {
+    document.querySelectorAll('.protocol-checkbox').forEach(cb => cb.checked = check);
+};
+
+function initEssaiSelector() {
+    const selector = document.getElementById('choix-essai');
+    selector.innerHTML = '<option value="">-- Trial --</option>';
+    if(!varieteData.length) return;
+    const essais = [...new Set(varieteData.map(i => i.Essai))].sort();
+    essais.forEach(e => { const o = document.createElement('option'); o.value = e; o.textContent = e; selector.appendChild(o); });
+
+    selector.addEventListener('change', (e) => {
+        const essai = e.target.value;
+        const container = document.getElementById('protocol-selection-container');
+        const checkboxesDiv = document.getElementById('protocol-checkboxes');
+        checkboxesDiv.innerHTML = '';
+        if(!essai) { container.style.display = 'none'; return; }
+
+        const plots = varieteData.filter(p => p.Essai === essai);
+        const protocols = [...new Set(plots.map(p => p.Protocole || "Sans protocole"))].sort();
+
+        protocols.forEach(proto => {
+            const div = document.createElement('div');
+            div.innerHTML = `<label style="display:flex; align-items:center; font-weight:normal; margin:0; font-size:0.9em; cursor:pointer;">
+                <input type="checkbox" class="protocol-checkbox" value="${proto}" checked style="width:auto; margin:0 8px 0 0;"> ${proto}</label>`;
+            checkboxesDiv.appendChild(div);
+        });
+        container.style.display = 'block';
+    });
+}
+
+function generatePlotOrder() {
+    currentPlotOrder = [];
+    if (!currentEssai) return;
+    let plots = varieteData.filter(p => p.Essai === currentEssai && selectedProtocoles.includes(p.Protocole || "Sans protocole"));
+
+    const hasCoords = plots.every(p => p.Plan_X && p.Plan_Y);
+    if (hasCoords) {
+        plots.forEach(p => { p.x = parseInt(p.Plan_X); p.y = parseInt(p.Plan_Y); });
+        const mode = document.getElementById('mode-avancement').value;
+        switch (mode) {
+            case 'S': plots.sort((a,b) => { if (a.y !== b.y) return a.y - b.y; return (a.y % 2 !== 0) ? (a.x - b.x) : (b.x - a.x); }); break;
+            case 'Z': plots.sort((a,b) => (a.y - b.y) || (a.x - b.x)); break;
+            case 'U': plots.sort((a,b) => { if (a.x !== b.x) return a.x - b.x; return (a.x % 2 !== 0) ? (a.y - b.y) : (b.y - a.y); }); break;
+            case 'N': plots.sort((a,b) => (a.x - b.x) || (a.y - b.y)); break;
+        }
+    } else { plots.sort((a,b) => parseInt(a.Ent) - parseInt(b.Ent)); }
+    currentPlotOrder = plots.map(p => p._uuid);
+    updateProgressBar();
+}
+
+function updateProgressBar() {
+    if (!currentEssai || currentPlotOrder.length === 0) {
+        document.getElementById('trial-progress-bar').style.width = '0%'; document.getElementById('trial-progress-text').innerText = '0 / 0 (0%)'; return;
+    }
+    const donePlots = new Set(appObservations.filter(o => o.ESSAI === currentEssai).map(o => String(o.Ent)));
+    let validDoneCount = 0;
+    currentPlotOrder.forEach(uuid => { 
+        let plot = varieteData.find(p => p._uuid === uuid);
+        if (plot && donePlots.has(String(plot.Ent))) validDoneCount++; 
+    });
+    const total = currentPlotOrder.length;
+    const percent = total > 0 ? Math.round((validDoneCount / total) * 100) : 0;
+    document.getElementById('trial-progress-bar').style.width = percent + '%';
+    document.getElementById('trial-progress-text').innerText = `${validDoneCount} / ${total} (${percent}%)`;
+}
+
+function handleNavigate(direction) {
+    if (!currentEssai) return alert("Sélectionnez un essai.");
+    if (currentPlotOrder.length === 0) generatePlotOrder();
+    if (currentPlotOrder.length === 0) return alert("Aucune parcelle dans ces protocoles.");
+    
+    let idx = currentPlotOrder.indexOf(selectedPlotUuid);
+    if (idx === -1) idx = 0; else idx = (idx + direction + currentPlotOrder.length) % currentPlotOrder.length;
+    selectedPlotUuid = currentPlotOrder[idx];
+    updateUIForSelectedPlot(selectedPlotUuid);
+    parcelleValideeUuid = null;
+    document.getElementById('valider-parcelle').style.display = 'block';
+    
+    const notationArea = document.getElementById('central-notations-container');
+    const obsArea = document.getElementById('obs').parentNode;
+    const saveArea = document.getElementById('save-buttons-placeholder');
+    [notationArea, obsArea, saveArea].forEach(el => { if(el) { el.style.opacity = '0.4'; el.style.pointerEvents = 'none'; } });
+}
+
+function setupEventListeners() {
+    document.getElementById('lang-select').onchange = (e) => {
+        applyTranslations(e.target.value);
+        if(document.getElementById('bbchModal').style.display === 'block') document.getElementById('bbch-info-button').click(); 
+    };
+
+    document.getElementById('confirmer-essai').onclick = () => {
+        currentEssai = document.getElementById('choix-essai').value;
+        if (currentEssai) {
+            selectedProtocoles = Array.from(document.querySelectorAll('.protocol-checkbox:checked')).map(cb => cb.value);
+            if(selectedProtocoles.length === 0) return alert("Sélectionnez au moins un protocole.");
+
+            document.getElementById('session-setup').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            
+            const plotsInTrial = varieteData.filter(p => p.Essai === currentEssai);
+            const maxPlotNum = Math.max(0, ...plotsInTrial.map(p => parseInt(p.Ent) || 0));
+            if (maxPlotNum <= 99) currentDigitCount = 2;
+            else if (maxPlotNum <= 999) currentDigitCount = 3;
+            else currentDigitCount = 4;
+            
+            generatePlotOrder();
+            selectedPlotUuid = currentPlotOrder[0] || null;
+            updateUIForSelectedPlot(selectedPlotUuid);
+        } else { alert("Choisissez un essai"); }
+    };
+    
+    document.getElementById('valider-parcelle').onclick = () => {
+        parcelleValideeUuid = selectedPlotUuid;
+        document.getElementById('valider-parcelle').style.display = 'none';
+        document.getElementById('rep').value = 'A';
+        
+        const notationArea = document.getElementById('central-notations-container');
+        const obsArea = document.getElementById('obs').parentNode;
+        const saveArea = document.getElementById('save-buttons-placeholder');
+        [notationArea, obsArea, saveArea].forEach(el => { if(el) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; } });
+    };
+    
+    document.getElementById('parcelle-suivante').onclick = () => handleNavigate(1);
+    document.getElementById('parcelle-precedente').onclick = () => handleNavigate(-1);
+    document.getElementById('voir-plan-semis').onclick = () => openSowingPlan(false);
+    document.getElementById('closeSowingPlanModal').onclick = () => document.getElementById('sowingPlanModal').style.display='none';
+    
+    document.getElementById('btn-toggle-notations').onclick = () => {
+        const menuRow = document.getElementById('notation-menu-row');
+        menuRow.style.display = (menuRow.style.display === 'none') ? 'flex' : 'none';
+    };
+    document.querySelectorAll('.not-btn-choix').forEach(b => b.onclick = function() {
+        this.classList.toggle('active'); document.getElementById(this.dataset.target).classList.toggle('hidden-section');
+    });
+    
+    const floDiv = document.getElementById('flo-buttons');
+    for(let i=0; i<=100; i+=5) {
+        const b = document.createElement('div'); b.className = 'square-btn'; b.style.width = '32px'; b.textContent = i;
+        b.onclick = () => { floDiv.querySelectorAll('.selected').forEach(s=>s.classList.remove('selected')); b.classList.add('selected'); document.getElementById('flo-display').textContent = i + '%'; };
+        floDiv.appendChild(b);
+    }
+
+    document.getElementById('enregistrer').onclick = () => enregistrerObservation(0);
+    document.getElementById('enregistrer-suivant').onclick = () => enregistrerObservation(1);
+    document.getElementById('enregistrer-prec').onclick = () => enregistrerObservation(-1);
+    
+    document.getElementById('partager-csv').onclick = partagerCSV;
+    document.getElementById('telecharger-plan-csv').onclick = telechargerPlanCSV;
+    document.getElementById('changer-essai').onclick = () => location.reload();
+    
+    document.getElementById('reset-data-local').onclick = () => { if(confirm("Effacer les notes ?")) { localStorage.removeItem('observations_newtea_v2'); location.reload(); } };
+    document.getElementById('reset-base-essais').onclick = () => { if(confirm("Effacer la base ?")) { localStorage.removeItem('newtea_trials'); location.reload(); } };
+    
+    document.getElementById('plus-analyse').onclick = () => document.getElementById('numero-analyse').value++;
+    document.getElementById('minus-analyse').onclick = () => document.getElementById('numero-analyse').value = Math.max(1, document.getElementById('numero-analyse').value - 1);
+    document.getElementById('plus-stade').onclick = () => document.getElementById('stade').value++;
+    document.getElementById('minus-stade').onclick = () => document.getElementById('stade').value = Math.max(0, document.getElementById('stade').value - 1);
+    document.getElementById('plus-rep').onclick = () => { let el = document.getElementById('rep'); el.value = String.fromCharCode(el.value.charCodeAt(0)+1); };
+    document.getElementById('minus-rep').onclick = () => { let el = document.getElementById('rep'); el.value = String.fromCharCode(Math.max(65, el.value.charCodeAt(0)-1)); };
+    
+    document.getElementById('plus-receptivite').onclick = () => { document.getElementById('receptivite').value++; };
+    document.getElementById('minus-receptivite').onclick = () => { document.getElementById('receptivite').value = Math.max(0, document.getElementById('receptivite').value - 1); };
+
+    document.getElementById('btn-add-simple-line').onclick = () => { document.getElementById('choiceSimpleNotModal').style.display = 'block'; document.getElementById('new-simple-title-modal').focus(); };
+    document.getElementById('btn-choice-num').onclick = () => addSimpleLine('num');
+    document.getElementById('btn-choice-text').onclick = () => addSimpleLine('text');
+    document.getElementById('btn-choice-percent').onclick = () => addSimpleLine('percent');
+
+    // Aide BBCH
+    const bbchBtn = document.getElementById('bbch-info-button');
+    if(bbchBtn) {
+        bbchBtn.onclick = () => {
+            if(!currentEspece) return alert(getT("alert-select-parcelle"));
+            if (typeof bbchInfoData === 'undefined') return alert("Fichier translations.js manquant.");
+            const lang = document.getElementById('lang-select').value;
+            const div = document.getElementById('bbch-modal-body');
+            const data = bbchInfoData[lang] || bbchInfoData['fr'];
+            const list = data[currentEspece] || [];
+            let html = '<table id="bbch-table"><thead><tr><th>Code</th><th>Stade</th></tr></thead><tbody>' + list.map(d=>`<tr><td>${d.code}</td><td>${d.desc}</td></tr>`).join('') + '</tbody></table>';
+            div.innerHTML = html;
+            document.getElementById('bbchModal').style.display='block';
+        };
+    }
+    document.getElementById('closeBbchModal').onclick = () => document.getElementById('bbchModal').style.display='none';
+}
+
+function addSimpleLine(type) {
+    const title = document.getElementById('new-simple-title-modal').value.trim();
+    if (!title) return;
+    const code = title.toLowerCase().replace(/\s+/g, '_');
+    simpleNotationsConfig.push({ label: title, code: code, type: type }); 
+    document.getElementById('choiceSimpleNotModal').style.display = 'none';
+    document.getElementById('new-simple-title-modal').value = "";
+    initSimpleNotationsUI();
+}
+
+function updateUIForSelectedPlot(uuid) {
+    const plot = uuid ? varieteData.find(i => i._uuid === uuid) : null;
+    
+    let coordsSuffix = (plot && plot.Plan_Y && plot.Plan_X) ? ` <span style="font-size:0.85em; color:#7f8c8d;">(${String(plot.Plan_Y).padStart(3, '0')},${String(plot.Plan_X).padStart(3, '0')})</span>` : "";
+    document.getElementById('variete-text').innerHTML = `Nom / Variété : ` + (plot ? plot.variete : "Inconnue") + coordsSuffix;
+    
+    document.getElementById('param-variete').value = plot ? plot.variete : "";
+    document.getElementById('param-type').value = plot && plot.Type ? plot.Type : "";
+
+    currentEspece = plot ? plot.Espece : null;
+    currentGps = plot ? plot.Gps : null;
+    document.getElementById('espece-text').textContent = currentEspece ? currentEspece.toUpperCase() : "";
+    
+    const themes = ['theme-mais', 'theme-tournesol', 'theme-colza', 'theme-soja', 'theme-sorgho'];
+    document.body.classList.remove(...themes);
+    if (currentEspece) document.body.classList.add(`theme-${currentEspece.toLowerCase()}`);
+    
+    document.getElementById('voir-sur-carte').style.display = 'inline-block';
+    document.getElementById('voir-sur-carte').style.opacity = (currentGps && currentGps.length > 3) ? '1' : '0.5';
+    
+    const plots = varieteData.filter(p => p.Essai === currentEssai);
+    document.getElementById('voir-plan-semis').style.display = (plots.length > 0 && plots[0].Plan_X) ? 'inline-block' : 'none';
+    
+    const isValide = (parcelleValideeUuid !== null && parcelleValideeUuid === uuid);
+    document.getElementById('valider-parcelle').style.display = isValide ? 'none' : 'block';
+    
+    const notationArea = document.getElementById('central-notations-container');
+    const obsArea = document.getElementById('obs').parentNode;
+    const saveArea = document.getElementById('save-buttons-placeholder');
+    [notationArea, obsArea, saveArea].forEach(el => { if(el) { el.style.opacity = isValide ? '1' : '0.4'; el.style.pointerEvents = isValide ? 'auto' : 'none'; } });
+    
+    updateZenHeader(); renderMiniPlan();
+}
+
+// =================== GRAND PLAN DE SEMIS & MULTI-SELECT & PATH ===================
+function openSowingPlan(isMulti = false) {
+    const plots = varieteData.filter(p => p.Essai === currentEssai);
+    if (!plots.length || !plots[0].Plan_X) return alert("Pas de plan dispo.");
+
+    isMultiSelectMode = isMulti;
+    multiSelectedPlots.clear();
+
+    if (isMultiSelectMode) {
+        document.getElementById('plan-modal-title').textContent = getT("h2-multi-plan") || ("Appliquer à plusieurs : " + multiSelectTargetKey);
+        document.getElementById('multi-select-action-bar').style.display = 'block';
+        updateMultiSelectStatus();
+    } else {
+        document.getElementById('plan-modal-title').textContent = getT("h2-plan") || "Plan de Semis";
+        document.getElementById('multi-select-action-bar').style.display = 'none';
+    }
+
+    const hasExternalData = externalData && externalData.length > 0;
+    const controlsDiv = document.getElementById('plan-interactive-controls');
+    const filtersDiv = document.getElementById('interactive-filters');
+    const toggle = document.getElementById('interactive-mode-toggle');
+    
+    if(hasExternalData) {
+        populateInteractiveFilters();
+        controlsDiv.classList.add('active');
+        filtersDiv.style.display = toggle.checked ? 'flex' : 'none';
+    } else {
+        controlsDiv.classList.remove('active');
+        toggle.checked = false; 
+    }
+
+    const isInteractive = toggle.checked;
+    const selectedDataKey = document.getElementById('interactive-data-select')?.value;
+    const notatorSelect = document.getElementById('interactive-notator-select')?.value;
+    const maxDays = parseInt(document.getElementById('interactive-days-input')?.value) || 0;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const todoToggle = document.getElementById('todo-mode-toggle');
+    const pathToggle = document.getElementById('path-mode-toggle');
+    
+    let minX = Math.min(...plots.map(p => parseInt(p.Plan_X))), minY = Math.min(...plots.map(p => parseInt(p.Plan_Y)));
+    let maxX = Math.max(...plots.map(p => parseInt(p.Plan_X))), maxY = Math.max(...plots.map(p => parseInt(p.Plan_Y)));
+
+    let minVal = Infinity, maxVal = -Infinity;
+    if(isInteractive && selectedDataKey && externalData) {
+         externalData.forEach(d => {
+             let val = d[selectedDataKey];
+             if (val !== undefined && val !== null && String(val).trim() !== "") {
+                 if(!isNaN(parseFloat(val.replace('%','')))) {
+                     let num = parseFloat(val.replace('%',''));
+                     if(num < minVal) minVal = num;
+                     if(num > maxVal) maxVal = num;
+                 }
+             }
+         });
+    }
+
+    let html = `<div id="sowing-plan-inner-wrapper" style="position:relative; display:inline-block; min-width:100%;">
+    <table id="sowing-table"><tbody>`;
+    for(let r=maxY; r>=minY; r--) {
+        const rowClickAction = isMultiSelectMode ? `onclick="toggleMultiRow(${r})"` : '';
+        html += `<tr><td class="sticky-y" style="cursor: ${isMultiSelectMode ? 'pointer' : 'default'};" ${rowClickAction}>${r}</td>`;
+        for(let c=minX; c<=maxX; c++) {
+            const p = plots.find(plot => parseInt(plot.Plan_X) === c && parseInt(plot.Plan_Y) === r);
+            let codeOriginal = p ? p._uuid : "";
+            let codeAffiche = p ? parseInt(p.Ent) : ""; 
+            let classes = ['plan-cell'];
+            let isSelected = (!isMultiSelectMode && codeOriginal === selectedPlotUuid);
+            let displayContent = (p && p.Type) ? p.Type : '';
+            let style = "";
+            let heatmapColor = "";
+
+            if(p && todoToggle.checked) {
+                const isDone = appObservations.some(obs => String(obs.Ent).padStart(currentDigitCount,'0') === String(p.Ent).padStart(currentDigitCount,'0') && obs.ESSAI === currentEssai);
+                if(isDone) classes.push('hatched-pattern');
+            }
+
+            if (p && isInteractive && selectedDataKey) {
+                let matches = externalData.filter(d => d.ESSAI === currentEssai && String(d.Ent).padStart(currentDigitCount,'0') === String(p.Ent).padStart(currentDigitCount,'0'));
+                if (notatorSelect && notatorSelect !== "") matches = matches.filter(d => d.Notateur === notatorSelect);
+                const recentMatches = matches.filter(d => {
+                    if(!d.Date) return false;
+                    const obsDate = new Date(d.Date); obsDate.setHours(0,0,0,0);
+                    return Math.ceil(Math.abs(today - obsDate) / (86400000)) <= maxDays;
+                });
+                
+                const validMatches = recentMatches.filter(d => d[selectedDataKey] !== undefined && d[selectedDataKey] !== null && String(d[selectedDataKey]).trim() !== "");
+                validMatches.sort((a,b) => { const dA = new Date(a.Date+(a.Heure?"T"+a.Heure:"")); const dB = new Date(b.Date+(b.Heure?"T"+b.Heure:"")); return dB - dA; });
+
+                if(validMatches.length > 0) {
+                    let val = validMatches[0][selectedDataKey];
+                    if(val !== undefined && val !== "") {
+                         if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) { val = val.split('-')[2]+"/"+val.split('-')[1]; }
+                         if(!isNaN(parseFloat(val.replace('%',''))) && maxVal > minVal) {
+                             let num = parseFloat(val.replace('%',''));
+                             let ratio = (num - minVal) / (maxVal - minVal);
+                             let hue = ratio * 120; 
+                             heatmapColor = `background-color: hsl(${hue}, 80%, 80%); border: 1px solid hsl(${hue}, 80%, 40%);`;
+                         }
+                         displayContent = `<span class="interactive-val" style="${heatmapColor}">${val}</span>`;
+                    } else { displayContent = `<span style="opacity:0.3">-</span>`; }
+                } else { displayContent = `<span style="opacity:0.3">-</span>`; }
+            } 
+
+            if (p) {
+                const isSelectedProtocol = selectedProtocoles.includes(p.Protocole || "Sans protocole");
+                if (!isSelectedProtocol) { classes.push('plot-disabled'); classes.splice(classes.indexOf('plan-cell'), 1); }
+                if (p.Type === 'M') classes.push('type-M'); else if (p.Type === 'F') classes.push('type-F'); else if (p.Type === 'H') classes.push('type-H');
+                if (isSelected) classes.push('current-plot-cell');
+                style = "cursor:pointer;";
+            } else { style = "background:transparent; color:#ccc;"; }
+
+            const cellClick = codeOriginal ? (isMultiSelectMode ? `toggleMultiCell(this, '${codeOriginal}')` : `selectFromPlan('${codeOriginal}')`) : '';
+
+            html += `<td class="${classes.join(' ')}" style="${style}" data-code="${codeOriginal}" data-x="${c}" data-y="${r}" onclick="${cellClick}">
+                        ${codeAffiche}<br><span style="font-size:0.75em; position:relative; z-index:2;">${displayContent}</span></td>`;
+        }
+        html += '</tr>';
+    }
+    
+    html += `<tr><th class="sticky-corner-bottom">Y\\X</th>`;
+    for(let c=minX; c<=maxX; c++) {
+        const clickAction = isMultiSelectMode ? `onclick="toggleMultiCol(${c})"` : '';
+        html += `<th class="sticky-x-bottom" style="cursor: ${isMultiSelectMode ? 'pointer' : 'default'};" ${clickAction}>${c}</th>`;
+    }
+    html += '</tr></tbody></table></div>';
+    
+    document.getElementById('sowing-plan-grid-container').innerHTML = html;
+    document.getElementById('sowingPlanModal').style.display = 'block';
+
+    if (pathToggle && pathToggle.checked && !isMultiSelectMode) {
+        setTimeout(window.drawMovementPath, 100);
+    }
+}
+
+// MULTI-SELECT FUNCTIONS
+function openMultiSelectPlan(keyName, inputIdOrSelector) {
+    let val = "";
+    const el = document.getElementById(inputIdOrSelector) || document.querySelector(inputIdOrSelector);
+    if (el) {
+        if(el.tagName === 'INPUT') val = el.value;
+        else val = el.textContent.replace('%','').trim();
+    }
+    if (!val || val === "0" || val === "") return alert("Veuillez d'abord saisir une valeur avant d'utiliser la saisie groupée.");
+    
+    multiSelectTargetKey = keyName;
+    multiSelectTargetValue = val;
+    openSowingPlan(true);
+}
+
+function toggleMultiCell(td, code) {
+    if(multiSelectedPlots.has(code)) {
+        multiSelectedPlots.delete(code); td.classList.remove('multi-selected');
+    } else {
+        multiSelectedPlots.add(code); td.classList.add('multi-selected');
+    }
+    updateMultiSelectStatus();
+}
+
+function toggleMultiRow(y) {
+    const cells = document.querySelectorAll(`td.plan-cell[data-y="${y}"]`);
+    let allSelected = true;
+    cells.forEach(td => { if(td.dataset.code && !multiSelectedPlots.has(td.dataset.code)) allSelected = false; });
+    cells.forEach(td => {
+        const code = td.dataset.code;
+        if(code) {
+            if(allSelected) { multiSelectedPlots.delete(code); td.classList.remove('multi-selected'); }
+            else { multiSelectedPlots.add(code); td.classList.add('multi-selected'); }
+        }
+    });
+    updateMultiSelectStatus();
+}
+
+function toggleMultiCol(x) {
+    const cells = document.querySelectorAll(`td.plan-cell[data-x="${x}"]`);
+    let allSelected = true;
+    cells.forEach(td => { if(td.dataset.code && !multiSelectedPlots.has(td.dataset.code)) allSelected = false; });
+    cells.forEach(td => {
+        const code = td.dataset.code;
+        if(code) {
+            if(allSelected) { multiSelectedPlots.delete(code); td.classList.remove('multi-selected'); }
+            else { multiSelectedPlots.add(code); td.classList.add('multi-selected'); }
+        }
+    });
+    updateMultiSelectStatus();
+}
+
+function updateMultiSelectStatus() {
+    document.getElementById('multi-select-status').textContent = `${multiSelectedPlots.size} parcelle(s) sélectionnée(s)`;
+}
+
+function applyMultiSelect() {
+    if(multiSelectedPlots.size === 0) return;
+    const defaultDate = document.getElementById('custom-date').value;
+    const defaultTime = document.getElementById('custom-time').value;
+    const defaultMeteo = document.getElementById('meteo-select').value;
+    const defaultNotateur = document.getElementById('type-notation-session').value;
+    
+    let count = 0;
+    multiSelectedPlots.forEach(uuid => {
+        const plot = varieteData.find(p => p._uuid === uuid);
+        if(plot) {
+            let obs = {
+                id: Date.now() + Math.random(), Notateur: defaultNotateur, ESSAI: currentEssai, 
+                Ent: plot.Ent, Protocole: plot.Protocole || "", Variete: plot.variete,
+                Date: defaultDate, Heure: defaultTime, Meteo: defaultMeteo, Rep: "A", Observations: ""
+            };
+            if (multiSelectTargetKey === 'Floraison' && !multiSelectTargetValue.includes('%')) {
+                obs[multiSelectTargetKey] = multiSelectTargetValue + '%';
+            } else { obs[multiSelectTargetKey] = multiSelectTargetValue; }
+            appObservations.unshift(obs);
+            count++;
+        }
+    });
+    
+    localStorage.setItem('observations_newtea_v2', JSON.stringify(appObservations)); 
+    renderRecapTable(); updateProgressBar();
+    alert(`${count} parcelles enregistrées.`);
+    document.getElementById('sowingPlanModal').style.display='none';
+}
+
+// DRAW MOVEMENT PATH
+window.drawMovementPath = () => {
+    const wrapper = document.getElementById('sowing-plan-inner-wrapper');
+    if(!wrapper || isMultiSelectMode) return;
+    
+    let svg = document.getElementById('movement-path-svg');
+    if (svg) svg.remove();
+
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.id = 'movement-path-svg';
+    svg.style.position = 'absolute'; svg.style.top = '0'; svg.style.left = '0';
+    svg.style.width = '100%'; svg.style.height = '100%';
+    svg.style.pointerEvents = 'none'; svg.style.zIndex = '5';
+
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+    marker.setAttribute('id', 'arrowhead'); marker.setAttribute('markerWidth', '6'); marker.setAttribute('markerHeight', '5'); marker.setAttribute('refX', '6'); marker.setAttribute('refY', '2.5'); marker.setAttribute('orient', 'auto-start-reverse');
+    const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    polygon.setAttribute('points', '0 0, 6 2.5, 0 5'); polygon.setAttribute('fill', 'rgba(211, 84, 0, 0.85)'); 
+    marker.appendChild(polygon); defs.appendChild(marker); svg.appendChild(defs);
+
+    if (currentPlotOrder.length === 0) generatePlotOrder();
+
+    let prevX = null, prevY = null;
+    currentPlotOrder.forEach(uuid => {
+        const cell = wrapper.querySelector(`td[data-code="${uuid}"]`);
+        if (cell) {
+            const cellX = cell.offsetLeft + (cell.offsetWidth / 2);
+            const cellY = cell.offsetTop + (cell.offsetHeight / 2);
+            if (prevX !== null && prevY !== null) {
+                const dx = cellX - prevX; const dy = cellY - prevY; const len = Math.sqrt(dx*dx + dy*dy);
+                if (len > 15) {
+                    const shortenStart = 10; const shortenEnd = 12;   
+                    const startX = prevX + (dx/len)*shortenStart; const startY = prevY + (dy/len)*shortenStart;
+                    const endX = cellX - (dx/len)*shortenEnd; const endY = cellY - (dy/len)*shortenEnd;
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', startX); line.setAttribute('y1', startY); line.setAttribute('x2', endX); line.setAttribute('y2', endY); line.setAttribute('stroke', 'rgba(211, 84, 0, 0.85)'); line.setAttribute('stroke-width', '2'); line.setAttribute('marker-end', 'url(#arrowhead)');
+                    svg.appendChild(line);
+                }
+            }
+            prevX = cellX; prevY = cellY;
+        }
+    });
+    wrapper.appendChild(svg);
+};
+
+window.zenNextAndValidate = () => {
+    handleNavigate(1);
+    parcelleValideeUuid = selectedPlotUuid;
+    document.getElementById('valider-parcelle').style.display = 'none';
+    document.getElementById('rep').value = 'A';
+    
+    const notationArea = document.getElementById('central-notations-container');
+    const obsArea = document.getElementById('obs').parentNode;
+    const saveArea = document.getElementById('save-buttons-placeholder');
+    [notationArea, obsArea, saveArea].forEach(el => { if(el) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; } });
+    updateZenHeader();
+};
+
+function enregistrerObservation(moveDir) {
+    if (isSaving) return; isSaving = true; setTimeout(() => { isSaving = false; }, 500);
+
+    if (!parcelleValideeUuid && currentZenTarget) document.getElementById('valider-parcelle').click();
+    if (!parcelleValideeUuid) return alert("Validez la parcelle d'abord.");
+
+    playSuccessSound();
+
+    let paramVariete = document.getElementById('param-variete').value.trim();
+    let paramType = document.getElementById('param-type').value;
+
+    let currentPlot = varieteData.find(p => p._uuid === parcelleValideeUuid);
+    if(currentPlot) {
+        let updated = false;
+        if(paramVariete && paramVariete !== currentPlot.variete) { currentPlot.variete = paramVariete; updated = true; }
+        if(paramType !== currentPlot.Type) { currentPlot.Type = paramType; updated = true; }
+        if(updated) saveVarieteDataLocal();
+    }
+
+    let obs = {
+        id: Date.now(), Notateur: document.getElementById('type-notation-session').value, ESSAI: currentEssai, 
+        Ent: currentPlot ? currentPlot.Ent : "",
+        Protocole: currentPlot ? currentPlot.Protocole : "",
+        Variete: currentPlot ? currentPlot.variete : "Inconnue",
+        Date: document.getElementById('custom-date').value, Heure: document.getElementById('custom-time').value,
+        Meteo: document.getElementById('meteo-select').value, Rep: document.getElementById('rep').value, Observations: document.getElementById('obs').value,
+    };
+    
+    if(document.getElementById('stade').value) obs.Stade = document.getElementById('stade').value;
+    const floSel = document.querySelector('#flo-buttons .selected'); if(floSel) obs.Floraison = floSel.textContent + "%";
+    if(document.getElementById('receptivite').value) obs.Receptivite = document.getElementById('receptivite').value;
+    if (document.getElementById('lettres-analyse').value !== "") {
+        obs.Code_Ech = (document.getElementById('lettres-analyse').value + document.getElementById('numero-analyse').value).toUpperCase();
+        document.getElementById('numero-analyse').value++;
+    }
+    simpleNotationsConfig.forEach(s => { const el = document.getElementById('not-simple-'+s.code); if(el && el.value) obs['Not_' + s.label] = el.value; });
+    
+    appObservations.unshift(obs); localStorage.setItem('observations_newtea_v2', JSON.stringify(appObservations)); renderRecapTable();
+    
+    if(moveDir !== 0) {
+        handleNavigate(moveDir); parcelleValideeUuid = selectedPlotUuid; updateUIForSelectedPlot(selectedPlotUuid); document.getElementById('rep').value = 'A';
+    } else { let r = document.getElementById('rep'); r.value = String.fromCharCode(r.value.toUpperCase().charCodeAt(0)+1); }
+    updateProgressBar(); updateZenHeader(); renderMiniPlan(); 
+}
+
+function renderRecapTable() {
+    const tbody = document.querySelector('#recap-table tbody'); if(!tbody) return;
+    tbody.innerHTML = appObservations.map(o => `<tr><td>${o.ESSAI}</td><td>${o.Ent}</td><td>${o.Rep}</td><td>${o.Code_Ech||'-'}</td><td>${o.Stade||'-'}</td><td>${o.Floraison||'-'}</td><td><button onclick="delObs(${o.id})" class="btn-danger" style="margin:0;padding:2px;">X</button></td></tr>`).join('');
+}
+
+window.delObs = (id) => { if(confirm("Supprimer cette note ?")) { appObservations = appObservations.filter(o => o.id !== id); localStorage.setItem('observations_newtea_v2', JSON.stringify(appObservations)); renderRecapTable(); updateProgressBar(); } };
+
+function initSimpleNotationsUI() {        
+    const div = document.getElementById('simple-notations-list'); div.innerHTML='';
+    simpleNotationsConfig.forEach(s => {
+        let inputField = "";
+        let btnMultiHtml = `<button type="button" class="btn-multi" onclick="openMultiSelectPlan('Not_${s.label}', 'not-simple-${s.code}')" title="Saisie Groupée">🔲</button>`;
+
+        if (s.type === 'num') {
+            inputField = `<div class="input-group-big"><button class="btn-secondary cube-btn" onclick="cV('${s.code}',-1)">-</button><div class="input-wrapper-relative"><input type="number" id="not-simple-${s.code}" value="0" class="input-big-text"></div><button class="btn-secondary cube-btn" onclick="cV('${s.code}',1)">+</button></div>`;
+        } else if (s.type === 'percent') {
+            let buttonsHtml = `<div class="square-btn-group" id="group-perc-${s.code}">`;
+            for (let i = 0; i <= 100; i += 5) { buttonsHtml += `<div class="square-btn" style="width:32px;" onclick="setPercValue('${s.code}', '${i}', this)">${i}</div>`; }
+            inputField = buttonsHtml + `</div><input type="hidden" id="not-simple-${s.code}" value="">`;
+        } else if (s.type === 'scale19') {
+            let buttonsHtml = `<div class="square-btn-group" id="group-scale-${s.code}">`;
+            for (let i = 1; i <= 9; i++) { buttonsHtml += `<div class="square-btn" onclick="setScaleValue('${s.code}', '${i}', this)">${i}</div>`; }
+            inputField = buttonsHtml + `</div><input type="hidden" id="not-simple-${s.code}" value="">`;
+        } else if (s.type === 'date') {
+            const today = new Date().toISOString().split('T')[0]; const [y,m,d] = today.split('-'); const defaultHidden = `${d}/${m}`;
+            inputField = `<div class="date-grid-wrapper" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%;"><button class="btn-secondary cube-btn date-minus" onclick="changeDate('${s.code}', -1)">-</button><input type="date" id="date-input-${s.code}" class="date-input-field" value="${today}" onchange="updateDateValue('${s.code}', this.value)" style="margin:0;"><button class="btn-secondary cube-btn date-plus" onclick="changeDate('${s.code}', 1)">+</button></div><input type="hidden" id="not-simple-${s.code}" value="${defaultHidden}">`;
+        } else if (s.type === 'photo') {
+            btnMultiHtml = ''; // Pas de multi select pour photo
+            const prefixVal = s.storedPrefix || s.code.toUpperCase();
+            const numVal = s.storedNum || 1;
+            inputField = `
+            <div class="photo-grid-wrapper" style="display:flex; align-items:center; gap:5px; width:100%;">
+                <input type="text" id="photo-prefix-${s.code}" class="photo-prefix" size="5" value="${prefixVal}" oninput="savePhotoState('${s.code}')" style="width:60px !important; margin:0;" readonly>
+                <input type="number" id="photo-num-${s.code}" class="photo-num" value="${numVal}" min="1" oninput="savePhotoState('${s.code}')" style="width:60px !important; margin:0;">
+                <button class="btn-secondary photo-minus cube-btn" onclick="let el=document.getElementById('photo-num-${s.code}'); el.value--; savePhotoState('${s.code}')">-</button>
+                <button class="btn-secondary photo-plus cube-btn" onclick="let el=document.getElementById('photo-num-${s.code}'); el.value++; savePhotoState('${s.code}')">+</button>
+                <button class="btn-primary photo-cam" onclick="triggerPhoto('${s.code}')">📷</button>
+                <input type="file" id="file-input-${s.code}" accept="image/*" capture="environment" style="display:none;" onchange="handlePhotoUpload(event, '${s.code}')">
+            </div>
+            <input type="hidden" id="not-simple-${s.code}" value="">
+            `;
+        } else { inputField = `<input type="text" id="not-simple-${s.code}" placeholder="..." style="margin:0; height:45px; border-radius:10px;">`; }
+        
+        div.innerHTML += `<div id="simple-line-${s.code}" class="simple-notation-line"><div class="simple-not-header zen-title-wrapper" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span>${s.label}</span><div style="display:flex; gap:5px; align-items:center;">${btnMultiHtml} <button type="button" class="btn-star" onclick="toggleZenMode('simple-line-${s.code}')">⭐</button> <button class="btn-danger" style="padding:2px 6px; font-size:0.7em;" onclick="removeSimpleLine('${s.code}')">X</button> <button type="button" class="btn-accent zen-next-val-btn" onclick="zenNextAndValidate()">Suiv. & Valider</button></div></div>${inputField}</div>`;
+    });
+}
+
+window.updateDateValue = (code, fullDate) => { if(!fullDate) return; const parts = fullDate.split('-'); document.getElementById('not-simple-' + code).value = parts[2] + "/" + parts[1]; }
+window.changeDate = (code, days) => { const input = document.getElementById(`date-input-${code}`); if (!input) return; let currentDate = new Date(input.value); if (isNaN(currentDate.getTime())) currentDate = new Date(); currentDate.setDate(currentDate.getDate() + days); const newDateStr = currentDate.toISOString().split('T')[0]; input.value = newDateStr; updateDateValue(code, newDateStr); };
+window.setScaleValue = (code, val, btn) => { const parent = document.getElementById(`group-scale-${code}`); parent.querySelectorAll('.selected').forEach(s => s.classList.remove('selected')); btn.classList.add('selected'); document.getElementById(`not-simple-${code}`).value = val; };
+window.setPercValue = (code, val, btn) => { const parent = document.getElementById(`group-perc-${code}`); parent.querySelectorAll('.selected').forEach(s => s.classList.remove('selected')); btn.classList.add('selected'); document.getElementById(`not-simple-${code}`).value = val + "%"; };
+window.cV = (c, d) => { let el = document.getElementById('not-simple-'+c); el.value = (parseInt(el.value) || 0) + d; }
+window.removeSimpleLine = (c) => { if(confirm("Supprimer ?")) { simpleNotationsConfig = simpleNotationsConfig.filter(x => x.code !== c); localStorage.setItem('simpleNotationsConfig', JSON.stringify(simpleNotationsConfig)); initSimpleNotationsUI(); } };
+window.openTab = (e,n) => { document.querySelectorAll('.tabcontent').forEach(x=>x.style.display='none'); document.querySelectorAll('.tablink').forEach(x=>x.classList.remove('active')); document.getElementById(n).style.display='block'; if(e) e.currentTarget.classList.add('active'); }
+function loadLocalObservations() { appObservations = JSON.parse(localStorage.getItem('observations_newtea_v2') || "[]"); simpleNotationsConfig = JSON.parse(localStorage.getItem('simpleNotationsConfig') || "[]"); renderRecapTable(); initSimpleNotationsUI(); }
+
+// --- LOGIQUE PHOTO TYPE OPPICS ---
+window.savePhotoState = (code) => {
+    const item = simpleNotationsConfig.find(x => x.code === code);
+    if(item) { item.storedPrefix = document.getElementById(`photo-prefix-${code}`).value; item.storedNum = document.getElementById(`photo-num-${code}`).value; localStorage.setItem('simpleNotationsConfig', JSON.stringify(simpleNotationsConfig)); }
+};
+window.triggerPhoto = (code) => { if (!parcelleValideeUuid) return alert("Validez la parcelle d'abord."); document.getElementById('file-input-' + code).click(); };
+
+window.handlePhotoUpload = (event, code) => {
+    const file = event.target.files[0]; if (!file) return;
+
+    const prefix = document.getElementById('photo-prefix-' + code).value;
+    const numInput = document.getElementById('photo-num-' + code);
+    const num = String(numInput.value).padStart(4, '0'); 
+
+    let currentPlot = varieteData.find(p => p._uuid === parcelleValideeUuid);
+    let pVar = currentPlot ? currentPlot.variete : "Inconnue";
+    let px = (currentPlot && currentPlot.Plan_X) ? currentPlot.Plan_X : "X";
+    let py = (currentPlot && currentPlot.Plan_Y) ? currentPlot.Plan_Y : "Y";
+    let cEspece = currentPlot ? currentPlot.Espece : currentEspece;
+    
+    let espLetters = { 'Mais': 'M', 'Tournesol': 'T', 'Colza': 'C', 'Soja': 'SOY', 'Sorgho': 'SOR' };
+    let espLetter = espLetters[cEspece] || 'X';
+    
+    let dateStr = document.getElementById('custom-date').value || new Date().toISOString().split('T')[0];
+    let annee = dateStr.split('-')[0];
+
+    const sanitizeVar = (s) => String(s).replace(/[^a-zA-Z0-9\s-_]/g, '');
+    const sanitizeName = (s) => String(s).replace(/[^a-zA-Z0-9-_]/g, '');
+
+    const baseName = `${sanitizeVar(pVar)}_${prefix}_${annee}_${sanitizeName(currentEssai)}_OPP_(${py},${px})`;
+    const filename = `${baseName}_${num}_${espLetter}.jpg`;
+
+    const blobUrl = URL.createObjectURL(file);
+    const link = document.createElement("a"); link.href = blobUrl; link.download = filename;
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+
+    document.getElementById('not-simple-' + code).value = filename;
+    numInput.value++; savePhotoState(code);
+    enregistrerObservation(0); 
+};
+
+function generateNotesCSVString() {
+    if(!appObservations.length) return null;
+    let cleanObs = appObservations.map(obs => { let clean = {}; for(let key in obs) { if(key && key.trim() !== "" && !key.includes('ï»¿')) clean[key] = obs[key]; } return clean; });
+    const fixedHeaders = ["Notateur", "ESSAI", "Protocole", "Ent", "Variete", "Date", "Heure", "Meteo", "Rep", "Stade", "Floraison", "Receptivite", "Code_Ech", "Observations"];
+    let dynamicKeys = new Set();
+    cleanObs.forEach(o => Object.keys(o).forEach(k => { if(k.startsWith('Not_')) dynamicKeys.add(k); }));
+    const finalKeys = [...fixedHeaders, ...Array.from(dynamicKeys).sort()];
+    const headerRow = finalKeys.map(k => (k.startsWith('Not_') && k !== 'Notateur') ? k.substring(4) : k);
+    let csv = headerRow.join(";") + "\n";
+    cleanObs.forEach(o => { csv += finalKeys.map(k => o[k] === undefined ? "" : o[k]).join(";") + "\n"; });
+    return csv;
+}
+
+function telechargerCSV() {
+    const csv = generateNotesCSVString(); if(!csv) return alert("Rien à exporter.");
+    const date = document.getElementById('custom-date').value || new Date().toISOString().split('T')[0]; 
+    const filename = `${currentEssai}_${date}_Export.csv`;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download = filename; a.click();
+}
+
+async function partagerCSV() {
+    const csv = generateNotesCSVString(); if(!csv) return alert("Rien à exporter.");
+    telechargerCSV();
+    const date = document.getElementById('custom-date').value || new Date().toISOString().split('T')[0]; 
+    const file = new File([new Blob([csv], {type: 'text/csv;charset=utf-8'})], `${currentEssai}_${date}.csv`, { type: 'text/csv' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], title: 'Export', text: 'Export Newtea' }); } catch (error) {}
+    }
+    setTimeout(() => { if (confirm("Purger (effacer) toutes les notes de l'appareil ?")) { appObservations = []; localStorage.removeItem('observations_newtea_v2'); renderRecapTable(); updateProgressBar(); } }, 1000); 
+}
+
+function telechargerPlanCSV() {
+    if(!currentEssai) return alert("Choisis un essai");
+    const plots = varieteData.filter(p => p.Essai === currentEssai);
+    const cols = ["Ent", "variete", "Essai", "Espece", "Gps", "Plan_X", "Plan_Y", "Type", "Protocole"];
+    let csv = cols.join(";") + "\n"; plots.forEach(p => { csv += cols.map(c => p[c] === undefined ? "" : p[c]).join(";") + "\n"; });
+    const a = document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download=`Plan_${currentEssai}.csv`; a.click();
+}
+
+let currentZenTarget = null; let originalZenParent = null; let wakeLock = null;
+async function toggleZenMode(targetId) {
+    if (!parcelleValideeUuid) return alert("Validez la parcelle d'abord.");
+    currentZenTarget = document.getElementById(targetId); if (!currentZenTarget) return;
+    originalZenParent = currentZenTarget.parentNode;
+    document.getElementById('zen-content').appendChild(currentZenTarget);
+    document.getElementById('zen-save-buttons-container').appendChild(document.getElementById('main-save-buttons'));
+    updateZenHeader(); document.getElementById('zen-overlay').style.display = 'flex';
+    try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (err) {}
+}
+function exitZenMode() {
+    if (currentZenTarget && originalZenParent) originalZenParent.appendChild(currentZenTarget);
+    const placeholder = document.getElementById('save-buttons-placeholder');
+    if(placeholder) placeholder.appendChild(document.getElementById('main-save-buttons'));
+    document.getElementById('zen-overlay').style.display = 'none'; currentZenTarget = null; originalZenParent = null;
+    if (wakeLock !== null) { wakeLock.release().then(() => wakeLock = null); }
+}
+
+function updateZenHeader() {
+    if (document.getElementById('zen-overlay').style.display === 'flex') {
+        const plot = varieteData.find(p => p._uuid === parcelleValideeUuid);
+        document.getElementById('zen-title').textContent = `Ent ${plot ? plot.Ent : "?"}`;
+        let coordsSuffix = (plot && plot.Plan_Y && plot.Plan_X) ? ` (${String(plot.Plan_Y).padStart(3, '0')},${String(plot.Plan_X).padStart(3, '0')})` : "";
+        document.getElementById('zen-subtitle').textContent = (plot ? plot.variete : "Inconnue") + coordsSuffix;
+        document.getElementById('zen-rep').textContent = `Rep : ${document.getElementById('rep').value}`;
+
+        // Preview Interactif dans le mode Zen
+        const previewEl = document.getElementById('zen-interactive-preview');
+        const isInteractive = document.getElementById('interactive-mode-toggle') && document.getElementById('interactive-mode-toggle').checked;
+        const selectedDataKey = document.getElementById('interactive-data-select') ? document.getElementById('interactive-data-select').value : null;
+        
+        if (isInteractive && selectedDataKey && externalData && externalData.length > 0 && plot) {
+            const maxDays = parseInt(document.getElementById('interactive-days-input').value) || 0;
+            const notatorSelect = document.getElementById('interactive-notator-select').value;
+            const today = new Date(); today.setHours(0,0,0,0);
+            
+            let matches = externalData.filter(d => d.ESSAI === currentEssai && String(d.Ent) === String(plot.Ent));
+            if (notatorSelect !== "") matches = matches.filter(d => d.Notateur === notatorSelect);
+            
+            const recentMatches = matches.filter(d => {
+                if(!d.Date) return false;
+                const obsDate = new Date(d.Date); obsDate.setHours(0,0,0,0);
+                return Math.ceil(Math.abs(today - obsDate) / (86400000)) <= maxDays;
+            });
+            
+            const validMatches = recentMatches.filter(d => d[selectedDataKey] !== undefined && d[selectedDataKey] !== null && String(d[selectedDataKey]).trim() !== "");
+            validMatches.sort((a,b) => { const dA = new Date(a.Date+(a.Heure?"T"+a.Heure:"")); const dB = new Date(b.Date+(b.Heure?"T"+b.Heure:"")); return dB - dA; });
+
+            if (validMatches.length > 0) {
+                let val = validMatches[0][selectedDataKey];
+                if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) { val = val.split('-')[2]+"/"+val.split('-')[1]; }
+                let label = selectedDataKey.startsWith('Not_') ? selectedDataKey.substring(4) : selectedDataKey;
+                previewEl.textContent = `${label} : ${val}`;
+                previewEl.style.display = 'inline-block';
+            } else {
+                previewEl.style.display = 'none';
+            }
+        } else {
+            previewEl.style.display = 'none';
+        }
+    }
+}
+</script>
+</body>
+</html>

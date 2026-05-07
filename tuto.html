@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newtea - Guide d'Utilisation / User Guide</title>
+    <style>
+        :root {
+            --primary: #33A532;
+            --secondary: #227A49;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #fff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-bar {
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar select {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #fff;
+            color: var(--secondary);
+            font-weight: bold;
+            outline: none;
+        }
+
+        .btn-print {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-print:hover { background-color: #278226; }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--secondary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-top: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-top: 25px;
+            font-size: 1.3rem;
+        }
+
+        p { margin-bottom: 15px; }
+
+        ul, ol { margin-bottom: 20px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+        .highlight {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background-color: #ffebee;
+            border-left-color: #c0392b;
+            color: #c0392b;
+        }
+
+        /* MOCKUPS / ILLUSTRATIONS CSS */
+        .mockup {
+            background: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .m-table { border-collapse: collapse; margin-top: 10px; font-size: 0.9em;}
+        .m-table th, .m-table td { border: 1px solid #ced4da; padding: 10px; text-align: center; width: 40px; height: 40px;}
+        .m-table th { background: var(--secondary); color: white; }
+        .m-type-m { background-color: #e3f2fd; }
+        .m-type-f { background-color: #e8f5e9; }
+        .m-type-h { background-color: #fff9c4; }
+        .m-hatched { background-image: linear-gradient(45deg, rgba(0,0,0,0.15) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15) 75%, transparent 75%, transparent); background-size: 8px 8px; }
+        .m-selected { background-color: var(--primary) !important; color: white !important; font-weight: bold; box-shadow: inset 0 0 0 2px #fff; }
+
+        .m-qr-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.8em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .m-action-btn { background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; }
+        .m-star-btn { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 5px 8px; font-size: 1.2em; display: inline-block; }
+
+        /* Gestion de l'affichage des langues */
+        .lang-content { display: none; }
+        body[data-lang="fr"] .lang-content[lang="fr"] { display: block; }
+        body[data-lang="en"] .lang-content[lang="en"] { display: block; }
+        body[data-lang="es"] .lang-content[lang="es"] { display: block; }
+        body[data-lang="pl"] .lang-content[lang="pl"] { display: block; }
+        body[data-lang="ro"] .lang-content[lang="ro"] { display: block; }
+        body[data-lang="uk"] .lang-content[lang="uk"] { display: block; }
+
+        @media print {
+            .top-bar { display: none !important; }
+            .container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
+            body { background-color: #fff; }
+            h2 { page-break-after: avoid; }
+            .highlight, .mockup { page-break-inside: avoid; }
+            .btn-print { display: none !important; }
+        }
+    </style>
+</head>
+<body data-lang="fr">
+
+    <div class="top-bar">
+        <div>
+            <label for="lang-selector" style="margin-right:10px; font-weight:bold;">🌐 Language :</label>
+            <select id="lang-selector" onchange="changeLanguage(this.value)">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="pl">Polski</option>
+                <option value="ro">Română</option>
+                <option value="uk">Українська</option>
+            </select>
+        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ PDF / Print</button>
+    </div>
+
+    <div class="container">
+
+        <!-- ==============================================
+             VERSION FRANÇAISE
+             ============================================== -->
+        <div class="lang-content" lang="fr">
+            <h1>📖 Guide d'Utilisation : Newtea</h1>
+            
+            <p><strong>Newtea</strong> est une application web progressive (PWA) conçue pour la création, la gestion et la notation d'essais agronomiques en plein champ. Elle a été pensée pour être rapide, intuitive, et surtout pour fonctionner <strong>100% hors-ligne</strong> une fois installée sur votre appareil.</p>
+
+            <h2>1. Installation sur Smartphone ou Tablette (Hors-Ligne)</h2>
+            <p>Pour garantir que l'application fonctionne au milieu d'un champ sans aucun réseau internet, vous <strong>devez</strong> l'installer sur votre écran d'accueil.</p>
+            <ul>
+                <li><strong>Sur Android (Google Chrome) :</strong> Ouvrez le lien de l'application. Appuyez sur les trois petits points <strong style="font-size:1.2em;">⋮</strong> en haut à droite du navigateur, puis sélectionnez <em>"Ajouter à l'écran d'accueil"</em>.</li>
+                <li><strong>Sur iOS (Apple Safari) :</strong> Ouvrez le lien de l'application. Appuyez sur l'icône "Partager" (le carré avec une flèche vers le haut) en bas de l'écran, faites défiler vers le bas, puis choisissez <em>"Sur l'écran d'accueil"</em>.</li>
+            </ul>
+            <p>Lancez ensuite l'application depuis la nouvelle icône apparue avec vos autres applications.</p>
+
+            <h2>2. Démarrage et Configuration de la Session</h2>
+            <p>À l'ouverture de l'application, l'écran d'accueil s'affiche. Suivez ces étapes :</p>
+            <ol>
+                <li>Entrez obligatoirement votre <strong>Nom / Code Notateur</strong>. Cela permettra d'identifier vos notes lors de l'export.</li>
+                <li>Choisissez comment démarrer votre session :
+                    <ul>
+                        <li><strong>Noter un essai existant :</strong> Sélectionnez un essai déjà en mémoire, puis cochez/décochez les <strong>Protocoles</strong> que vous souhaitez évaluer.</li>
+                        <li><strong>Importer un essai (CSV) :</strong> Chargez le plan d'un essai préparé sur Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Télécharger le modèle CSV</button></li>
+                        <li><strong>Créer un nouvel essai :</strong> Si vous n'avez pas de fichier, vous pouvez générer une grille vierge en indiquant le nom, l'espèce, les colonnes (X) et les lignes (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. L'Interface Principale & Navigation</h2>
+            <p>L'application se divise en deux onglets principaux en haut de l'écran : <strong>Note</strong> (votre outil de travail principal) et <strong>Config</strong> (pour les paramètres et exports).</p>
+
+            <h3>Comment sélectionner une parcelle ?</h3>
+            <p>L'application vous propose deux méthodes extrêmement rapides :</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Méthode 1 : Le Scanner QR Code</strong>
+                    <p style="font-size:0.9em; color:#555;">Idéal pour flasher directement l'étiquette de la parcelle et la valider instantanément.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Méthode 2 : Le Mini-Plan</strong>
+                    <p style="font-size:0.9em; color:#555;">Idéal pour voir où vous êtes (coordonnées X/Y) et cliquer sur la case suivante visuellement.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Code Couleurs du Plan :</strong><br>
+                Le fond bleu désigne le type <strong>M (Mâle)</strong>, le vert le type <strong>F (Femelle)</strong>, et le jaune le type <strong>H (Hybride)</strong>.<br>
+                Lorsqu'une parcelle est <strong>hachurée</strong>, cela signifie qu'une note a déjà été enregistrée pour celle-ci ! La parcelle actuellement sélectionnée est en <strong>vert vif</strong>.
+            </div>
+
+            <h2>4. Saisir vos Observations</h2>
+            <p>Une fois la parcelle sélectionnée (ou scannée via le QR Code), la parcelle est validée. L'interface de notation est déverrouillée.</p>
+
+            <ol>
+                <li>Ouvrez les menus via le bouton <strong>"► MENUS"</strong> et sélectionnez ce que vous souhaitez noter (Stade, Floraison, Paramètres, Photos...).</li>
+                <li>Saisissez vos valeurs à l'aide des boutons <code>+</code> / <code>-</code>, ou en prenant une photo 📷.</li>
+                <li>Ajoutez des <strong>Observations</strong> textuelles si nécessaire (vous pouvez utiliser le micro 🎤 pour dicter).</li>
+                <li>Cliquez sur <strong>Enregistrer</strong> (ou Enr. Suivant) tout en bas pour sauvegarder. La note s'ajoutera dans le tableau des "Derniers enregistrements".</li>
+            </ol>
+
+            <h2>5. Fonctionnalités Expertes pour aller plus vite</h2>
+
+            <h3>🔲 La Saisie Groupée (Multi-Sélection)</h3>
+            <p>Si plusieurs parcelles autour de vous ont exactement la même valeur (ex: un champ entier est au stade BBCH 65), utilisez la saisie groupée pour gagner un temps précieux :</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Stade (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Entrez la valeur "65" dans le champ Stade.</li>
+                <li>Cliquez sur l'icône <strong>🔲</strong> située à côté du titre.</li>
+                <li>Le grand plan de semis s'ouvre. Cliquez sur toutes les parcelles concernées (elles deviendront rouges). <em>Astuce : cliquez sur un en-tête de colonne (X) ou de ligne (Y) pour sélectionner toute la ligne d'un coup !</em></li>
+                <li>Cliquez sur le bouton final <strong>"Appliquer à la sélection"</strong>. Les notes sont enregistrées.</li>
+            </ol>
+
+            <h3>⭐ Le Mode Zen (Plein Écran)</h3>
+            <p>Vous ne voulez noter qu'un seul critère (ex: la floraison) et marcher rapidement dans le champ ? Activez le Mode Zen en cliquant sur l'étoile <strong>⭐</strong> à côté du titre de la notation.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Floraison (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>L'interface s'agrandira pour prendre tout l'écran, avec des boutons géants.</p>
+            <div class="highlight warning">
+                <strong>⚠️ TRÈS IMPORTANT EN MODE ZEN :</strong><br>
+                Dans ce mode, un bouton <strong>"⏭ Suivant"</strong> apparaît en haut. Il permet de passer directement à la parcelle suivante géographiquement... <strong>Mais il n'enregistre pas votre note !</strong><br><br>
+                Pour que la note soit sauvegardée, vous <strong>devez</strong> utiliser les boutons "Enregistrer" situés tout en bas de l'écran Zen.
+            </div>
+
+            <h2>6. Sauvegarde, Exportation et Sécurité</h2>
+            <p>L'application ne nécessitant pas d'internet, <strong>absolument toutes vos données sont stockées à l'intérieur de votre navigateur internet</strong>. Elles ne sont envoyées sur aucun serveur.</p>
+
+            <ul>
+                <li>Si vous videz l'historique ou le cache de votre navigateur, <strong>vos notes seront effacées.</strong></li>
+                <li>Il est donc primordial d'exporter vos données régulièrement.</li>
+            </ul>
+
+            <p>Allez dans l'onglet <strong>Configuration (Config)</strong> :</p>
+            <ol>
+                <li>Cliquez sur <strong>"📥/📤 Sauvegarder CSV, Partager & Purger"</strong>.</li>
+                <li>Le fichier contenant toutes vos notes va se télécharger automatiquement.</li>
+                <li>Si votre appareil le permet, un menu de partage s'ouvrira (pour l'envoyer par email ou sur un Drive).</li>
+                <li>Une boîte de dialogue vous demandera enfin si vous souhaitez <strong>purger</strong> (effacer) les notes de l'appareil maintenant que la sauvegarde est faite. Cliquez sur "OK" pour repartir sur une base propre le lendemain.</li>
+            </ol>
+
+        </div>
+
+        <!-- ==============================================
+             ENGLISH VERSION
+             ============================================== -->
+        <div class="lang-content" lang="en">
+            <h1>📖 User Guide: Newtea App</h1>
+            
+            <p><strong>Newtea</strong> is a Progressive Web App (PWA) designed for creating, managing, and scoring agronomic field trials. It was built to be fast, intuitive, and most importantly, to work <strong>100% offline</strong> once installed on your device.</p>
+
+            <h2>1. Installation on Smartphone or Tablet (Offline Mode)</h2>
+            <p>To ensure the application works in the middle of a field without any internet network, you <strong>must</strong> install it on your home screen.</p>
+            <ul>
+                <li><strong>On Android (Google Chrome):</strong> Open the app's link. Tap the three vertical dots <strong style="font-size:1.2em;">⋮</strong> at the top right of the browser, then select <em>"Add to Home screen"</em>.</li>
+                <li><strong>On iOS (Apple Safari):</strong> Open the app's link. Tap the "Share" icon (the square with an upward arrow) at the bottom of the screen, scroll down, and choose <em>"Add to Home Screen"</em>.</li>
+            </ul>
+            <p>Then launch the application from the new icon that appeared with your other apps.</p>
+
+            <h2>2. Startup and Session Configuration</h2>
+            <p>When you open the app, the home screen appears. Follow these steps:</p>
+            <ol>
+                <li>You must enter your <strong>Name / Scorer Code</strong>. This identifies your scores when exporting.</li>
+                <li>Choose how to start your session:
+                    <ul>
+                        <li><strong>Score an existing trial:</strong> Select a trial already in memory, then check/uncheck the <strong>Protocols</strong> you want to evaluate.</li>
+                        <li><strong>Import a trial (CSV):</strong> Load a trial plan prepared on Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Download CSV Template</button></li>
+                        <li><strong>Create a new trial:</strong> If you don't have a file, generate a blank grid by entering the name, species, columns (X), and rows (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. Main Interface & Navigation</h2>
+            <p>The app is divided into two main tabs at the top of the screen: <strong>Note</strong> (your main working tool) and <strong>Config</strong> (for settings and exports).</p>
+
+            <h3>How to select a plot?</h3>
+            <p>The application offers two extremely fast methods:</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Method 1: QR Code Scanner</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal for directly scanning the plot label and validating it instantly.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Method 2: Mini-Plan</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal to see where you are (X/Y coordinates) and visually click the next box.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Plan Color Codes:</strong><br>
+                The blue background designates type <strong>M (Male)</strong>, green is type <strong>F (Female)</strong>, and yellow is type <strong>H (Hybrid)</strong>.<br>
+                When a plot is <strong>hatched</strong>, it means a score has already been recorded for it! The currently selected plot is highlighted in <strong>bright green</strong>.
+            </div>
+
+            <h2>4. Entering your Observations</h2>
+            <p>Once the plot is selected (or scanned via QR Code), the plot is validated. This unlocks the scoring interface.</p>
+
+            <ol>
+                <li>Open the menus via the <strong>"► MENUS"</strong> button and select what you want to score (Stage, Flowering, Parameters, Photos...).</li>
+                <li>Enter your values using the <code>+</code> / <code>-</code> buttons, or by taking a picture 📷.</li>
+                <li>Add text <strong>Observations</strong> if necessary (you can use the microphone 🎤 to dictate).</li>
+                <li>Click <strong>Save</strong> (or Save Next) at the very bottom to save. The note will be added to the "Recent records" table.</li>
+            </ol>
+
+            <h2>5. Expert Features for Faster Workflow</h2>
+
+            <h3>🔲 Group Input (Multi-Selection)</h3>
+            <p>If several plots around you have exactly the same value (e.g., an entire field is at BBCH stage 65), use group input to save precious time:</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Stage (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Enter the value "65" in the Stage field.</li>
+                <li>Click the <strong>🔲</strong> icon next to the title.</li>
+                <li>The large sowing plan opens. Click on all the relevant plots (they will turn red). <em>Tip: click on a column (X) or row (Y) header to select the entire line at once!</em></li>
+                <li>Click the final <strong>"Apply to selection"</strong> button. The scores are saved immediately.</li>
+            </ol>
+
+            <h3>⭐ Zen Mode (Full Screen)</h3>
+            <p>Want to score only one criterion (e.g., flowering) and walk quickly through the field? Activate Zen Mode by clicking the star <strong>⭐</strong> next to the notation title.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Flowering (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>The interface will expand to take up the whole screen, featuring giant buttons.</p>
+            <div class="highlight warning">
+                <strong>⚠️ VERY IMPORTANT IN ZEN MODE:</strong><br>
+                In this mode, a <strong>"⏭ Next"</strong> button appears at the top. It allows you to jump directly to the geographically next plot... <strong>But it does not save your score!</strong><br><br>
+                For the score to be saved, you <strong>must</strong> use the "Save" buttons located at the very bottom of the Zen screen.
+            </div>
+
+            <h2>6. Backup, Export, and Security</h2>
+            <p>Since the application does not require the internet, <strong>absolutely all your data is stored inside your internet browser</strong>. It is not sent to any server.</p>
+
+            <ul>
+                <li>If you clear your browser's history or cache, <strong>your notes will be deleted.</strong></li>
+                <li>It is therefore essential to export your data regularly.</li>
+            </ul>
+
+            <p>Go to the <strong>Configuration (Config)</strong> tab:</p>
+            <ol>
+                <li>Click on <strong>"📥/📤 Save CSV, Share & Purge"</strong>.</li>
+                <li>The file containing all your notes will download automatically.</li>
+                <li>If your device allows it, a share menu will open (to send it by email or to a Drive).</li>
+                <li>Finally, a dialog box will ask if you want to <strong>purge</strong> (delete) the notes from the device now that the backup is done. Click "OK" to start with a clean slate the next day.</li>
+            </ol>
+
+        </div>
+
+        <!-- ==============================================
+             SPANISH VERSION
+             ============================================== -->
+        <div class="lang-content" lang="es">
+            <h1>📖 Guía de Usuario: Newtea</h1>
+            
+            <p><strong>Newtea</strong> es una aplicación web progresiva (PWA) diseñada para la creación, gestión y anotación de ensayos agronómicos en campo. Ha sido diseñada para ser rápida, intuitiva y, sobre todo, para funcionar <strong>100% sin conexión (offline)</strong> una vez instalada en su dispositivo.</p>
+
+            <h2>1. Instalación en Smartphone o Tablet (Modo Offline)</h2>
+            <p>Para asegurar que la aplicación funcione en medio de un campo sin conexión a internet, <strong>debe</strong> instalarla en su pantalla de inicio.</p>
+            <ul>
+                <li><strong>En Android (Google Chrome):</strong> Abra el enlace de la aplicación. Toque los tres puntos verticales <strong style="font-size:1.2em;">⋮</strong> en la parte superior derecha del navegador, luego seleccione <em>"Añadir a la pantalla de inicio"</em>.</li>
+                <li><strong>En iOS (Apple Safari):</strong> Abra el enlace de la aplicación. Toque el icono "Compartir" (el cuadrado con una flecha hacia arriba) en la parte inferior de la pantalla, desplácese hacia abajo y elija <em>"Añadir a la pantalla de inicio"</em>.</li>
+            </ul>
+            <p>Luego inicie la aplicación desde el nuevo icono que apareció con sus otras aplicaciones.</p>
+
+            <h2>2. Inicio y Configuración de la Sesión</h2>
+            <p>Al abrir la aplicación, aparece la pantalla de inicio. Siga estos pasos:</p>
+            <ol>
+                <li>Debe introducir su <strong>Nombre / Código de Anotador</strong> de forma obligatoria. Esto identificará sus notas al exportar.</li>
+                <li>Elija cómo iniciar su sesión:
+                    <ul>
+                        <li><strong>Anotar un ensayo existente:</strong> Seleccione un ensayo ya en memoria, luego marque/desmarque los <strong>Protocolos</strong> que desea evaluar.</li>
+                        <li><strong>Importar un ensayo (CSV):</strong> Cargue el plan de un ensayo preparado en Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Descargar Plantilla CSV</button></li>
+                        <li><strong>Crear un nuevo ensayo:</strong> Si no tiene archivo, puede generar una cuadrícula en blanco indicando el nombre, la especie, las columnas (X) y las filas (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. Interfaz Principal y Navegación</h2>
+            <p>La aplicación se divide en dos pestañas principales en la parte superior: <strong>Nota</strong> (su herramienta principal) y <strong>Config</strong> (para ajustes y exportaciones).</p>
+
+            <h3>¿Cómo seleccionar una parcela?</h3>
+            <p>La aplicación ofrece dos métodos extremadamente rápidos:</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Método 1: Escáner de Código QR</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal para escanear directamente la etiqueta de la parcela y validarla al instante.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Método 2: El Mini-Plan</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal para ver dónde está (coordenadas X/Y) y hacer clic en la siguiente casilla visualmente.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Códigos de Colores del Plan:</strong><br>
+                El fondo azul designa el tipo <strong>M (Macho)</strong>, el verde es tipo <strong>F (Hembra)</strong>, y el amarillo es tipo <strong>H (Híbrido)</strong>.<br>
+                Cuando una parcela está <strong>rayada</strong>, ¡significa que ya se ha registrado una nota para ella! La parcela actualmente seleccionada está en <strong>verde brillante</strong>.
+            </div>
+
+            <h2>4. Introducir sus Observaciones</h2>
+            <p>Una vez seleccionada la parcela (o escaneada vía QR), la parcela se valida. Esto desbloquea la interfaz de anotación.</p>
+
+            <ol>
+                <li>Abra los menús mediante el botón <strong>"► MENÚS"</strong> y seleccione lo que desea anotar (Estadio, Floración, Parámetros, Fotos...).</li>
+                <li>Introduzca sus valores utilizando los botones <code>+</code> / <code>-</code> o tomando una foto 📷.</li>
+                <li>Añada <strong>Observaciones</strong> de texto si es necesario (puede usar el micrófono 🎤 para dictar).</li>
+                <li>Haga clic en <strong>Guardar</strong> (o Guardar Sig.) en la parte inferior para guardar. La nota se añadirá en la tabla de "Últimos registros".</li>
+            </ol>
+
+            <h2>5. Funciones Expertas para ir más rápido</h2>
+
+            <h3>🔲 Entrada Grupal (Selección Múltiple)</h3>
+            <p>Si varias parcelas a su alrededor tienen exactamente el mismo valor (ej: un campo entero está en estadio BBCH 65), use la entrada grupal para ahorrar tiempo:</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Estadio (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Introduzca el valor "65" en el campo Estadio.</li>
+                <li>Haga clic en el icono <strong>🔲</strong> junto al título.</li>
+                <li>Se abre el gran plan de siembra. Haga clic en todas las parcelas correspondientes (se volverán rojas). <em>Consejo: ¡haga clic en un encabezado de columna (X) o fila (Y) para seleccionar toda la línea a la vez!</em></li>
+                <li>Haga clic en el botón final <strong>"Aplicar a la selección"</strong>. Las notas se registran inmediatamente.</li>
+            </ol>
+
+            <h3>⭐ Modo Zen (Pantalla Completa)</h3>
+            <p>¿Solo quiere anotar un criterio (ej: la floración) y caminar rápidamente por el campo? Active el Modo Zen haciendo clic en la estrella <strong>⭐</strong> junto al título de la nota.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Floración (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>La interfaz se ampliará para ocupar toda la pantalla, con botones gigantes.</p>
+            <div class="highlight warning">
+                <strong>⚠️ MUY IMPORTANTE EN EL MODO ZEN:</strong><br>
+                En este modo, aparece un botón <strong>"⏭ Siguiente"</strong> en la parte superior. Le permite pasar directamente a la siguiente parcela geográficamente... <strong>¡Pero no guarda su nota!</strong><br><br>
+                Para que la nota se guarde, <strong>debe</strong> utilizar los botones "Guardar" ubicados en la parte inferior de la pantalla Zen.
+            </div>
+
+            <h2>6. Copia de Seguridad, Exportación y Seguridad</h2>
+            <p>Dado que la aplicación no requiere internet, <strong>absolutamente todos sus datos se almacenan dentro de su navegador de internet</strong>. No se envían a ningún servidor.</p>
+
+            <ul>
+                <li>Si borra el historial o la caché de su navegador, <strong>sus notas se borrarán.</strong></li>
+                <li>Por lo tanto, es fundamental exportar sus datos con regularidad.</li>
+            </ul>
+
+            <p>Vaya a la pestaña <strong>Configuración (Config)</strong>:</p>
+            <ol>
+                <li>Haga clic en <strong>"📥/📤 Guardar CSV, Compartir y Purgar"</strong>.</li>
+                <li>El archivo que contiene todas sus notas se descargará automáticamente.</li>
+                <li>Si su dispositivo lo permite, se abrirá un menú para compartir (para enviarlo por email o a un Drive).</li>
+                <li>Por último, un cuadro de diálogo le preguntará si desea <strong>purgar</strong> (borrar) las notas del dispositivo ahora que se ha realizado la copia de seguridad. Haga clic en "OK" para empezar con una base limpia al día siguiente.</li>
+            </ol>
+
+        </div>
+
+        <!-- ==============================================
+             POLISH VERSION
+             ============================================== -->
+        <div class="lang-content" lang="pl">
+            <h1>📖 Instrukcja obsługi: Newtea</h1>
+            
+            <p><strong>Newtea</strong> to progresywna aplikacja internetowa (PWA) przeznaczona do tworzenia, zarządzania i oceniania prób agronomicznych w polu. Została stworzona tak, aby była szybka, intuicyjna i co najważniejsze, działała w <strong>100% offline</strong> po zainstalowaniu na urządzeniu.</p>
+
+            <h2>1. Instalacja na smartfonie lub tablecie (Tryb Offline)</h2>
+            <p>Aby mieć pewność, że aplikacja zadziała w środku pola bez zasięgu internetu, <strong>musisz</strong> zainstalować ją na ekranie głównym.</p>
+            <ul>
+                <li><strong>Na Androidzie (Google Chrome):</strong> Otwórz link do aplikacji. Dotknij trzech pionowych kropek <strong style="font-size:1.2em;">⋮</strong> w prawym górnym rogu przeglądarki, a następnie wybierz <em>"Dodaj do ekranu głównego"</em>.</li>
+                <li><strong>Na iOS (Apple Safari):</strong> Otwórz link do aplikacji. Dotknij ikony "Udostępnij" (kwadrat ze strzałką w górę) na dole ekranu, przewiń w dół i wybierz <em>"Do ekranu początkowego"</em>.</li>
+            </ul>
+            <p>Następnie uruchom aplikację z nowej ikony, która pojawiła się wśród innych aplikacji.</p>
+
+            <h2>2. Uruchomienie i Konfiguracja Sesji</h2>
+            <p>Po otwarciu aplikacji pojawi się ekran główny. Wykonaj następujące kroki:</p>
+            <ol>
+                <li>Musisz wprowadzić swoje <strong>Imię / Kod Oceniającego</strong>. Pozwala to zidentyfikować Twoje oceny podczas eksportu.</li>
+                <li>Wybierz, jak rozpocząć sesję:
+                    <ul>
+                        <li><strong>Oceń istniejącą próbę:</strong> Wybierz próbę już zapisaną w pamięci, a następnie zaznacz/odznacz <strong>Protokoły</strong>, które chcesz ocenić.</li>
+                        <li><strong>Importuj próbę (CSV):</strong> Załaduj plan próby przygotowany w programie Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Pobierz Szablon CSV</button></li>
+                        <li><strong>Utwórz nową próbę:</strong> Jeśli nie masz pliku, możesz wygenerować pustą siatkę, podając nazwę, gatunek, kolumny (X) i rzędy (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. Główny Interfejs i Nawigacja</h2>
+            <p>Aplikacja jest podzielona na dwie główne zakładki na górze ekranu: <strong>Notatka</strong> (Twoje główne narzędzie pracy) oraz <strong>Konfiguracja</strong> (ustawienia i eksport).</p>
+
+            <h3>Jak wybrać poletko?</h3>
+            <p>Aplikacja oferuje dwie niezwykle szybkie metody:</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Metoda 1: Skaner kodów QR</strong>
+                    <p style="font-size:0.9em; color:#555;">Idealne do bezpośredniego skanowania etykiety poletka i natychmiastowego zatwierdzania.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Metoda 2: Mini-Plan</strong>
+                    <p style="font-size:0.9em; color:#555;">Idealne, by zobaczyć, gdzie jesteś (współrzędne X/Y), i kliknąć następne pole wizualnie.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Kody Kolorów Planu:</strong><br>
+                Niebieskie tło oznacza typ <strong>M (Męski)</strong>, zielone to typ <strong>F (Żeński)</strong>, a żółte to typ <strong>H (Mieszaniec)</strong>.<br>
+                Gdy poletko jest <strong>zakreskowane</strong>, oznacza to, że ocena została już dla niego zapisana! Aktualnie wybrane poletko jest zaznaczone na <strong>jasnozielony</strong> kolor.
+            </div>
+
+            <h2>4. Wprowadzanie Obserwacji</h2>
+            <p>Po wybraniu poletka (lub zeskanowaniu przez QR Code) poletko jest zatwierdzane. To odblokowuje interfejs oceniania.</p>
+
+            <ol>
+                <li>Otwórz menu za pomocą przycisku <strong>"► MENU"</strong> i wybierz to, co chcesz ocenić (Faza, Kwitnienie, Parametry, Zdjęcia...).</li>
+                <li>Wprowadź wartości używając przycisków <code>+</code> / <code>-</code> lub robiąc zdjęcie 📷.</li>
+                <li>Dodaj tekstowe <strong>Obserwacje</strong>, jeśli to konieczne (możesz użyć mikrofonu 🎤, aby dyktować).</li>
+                <li>Kliknij <strong>Zapisz</strong> (lub Zap. Nast. →) na samym dole, aby zapisać. Notatka zostanie dodana do tabeli "Ostatnie rekordy".</li>
+            </ol>
+
+            <h2>5. Zaawansowane Funkcje Przyspieszające Pracę</h2>
+
+            <h3>🔲 Wprowadzanie Grupowe (Wielokrotny Wybór)</h3>
+            <p>Jeśli kilka poletek wokół Ciebie ma dokładnie tę samą wartość (np. całe pole jest w fazie BBCH 65), użyj wprowadzania grupowego, aby zaoszczędzić cenny czas:</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Faza (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Wprowadź wartość "65" w polu Faza.</li>
+                <li>Kliknij ikonę <strong>🔲</strong> obok tytułu.</li>
+                <li>Otworzy się duży plan siewu. Kliknij na wszystkie odpowiednie poletka (zmienią kolor na czerwony). <em>Wskazówka: kliknij nagłówek kolumny (X) lub rzędu (Y), aby zaznaczyć całą linię na raz!</em></li>
+                <li>Kliknij przycisk <strong>"Zastosuj do wyboru"</strong> na samym dole. Oceny zostaną natychmiast zapisane.</li>
+            </ol>
+
+            <h3>⭐ Tryb Zen (Pełny Ekran)</h3>
+            <p>Chcesz oceniać tylko jedno kryterium (np. kwitnienie) i szybko przemieszczać się po polu? Włącz Tryb Zen, klikając gwiazdkę <strong>⭐</strong> obok tytułu oceny.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Kwitnienie (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>Interfejs powiększy się na cały ekran i będzie zawierał gigantyczne przyciski.</p>
+            <div class="highlight warning">
+                <strong>⚠️ BARDZO WAŻNE W TRYBIE ZEN:</strong><br>
+                W tym trybie na górze pojawia się przycisk <strong>"⏭ Następny"</strong>. Pozwala on przejść bezpośrednio do kolejnego geograficznie poletka... <strong>Ale to nie zapisuje twojej oceny!</strong><br><br>
+                Aby ocena została zapisana, <strong>musisz</strong> użyć przycisków "Zapisz" znajdujących się na samym dole ekranu Zen.
+            </div>
+
+            <h2>6. Kopia Zapasowa, Eksport i Bezpieczeństwo</h2>
+            <p>Ponieważ aplikacja nie wymaga dostępu do internetu, <strong>absolutnie wszystkie Twoje dane są przechowywane wewnątrz Twojej przeglądarki internetowej</strong>. Nie są one wysyłane na żaden serwer.</p>
+
+            <ul>
+                <li>Jeśli wyczyścisz historię przeglądarki lub pamięć podręczną, <strong>Twoje notatki zostaną usunięte.</strong></li>
+                <li>Dlatego ważne jest regularne eksportowanie danych.</li>
+            </ul>
+
+            <p>Przejdź do zakładki <strong>Konfiguracja</strong>:</p>
+            <ol>
+                <li>Kliknij na <strong>"📥/📤 Zapisz CSV, Udostępnij i Wyczyść"</strong>.</li>
+                <li>Plik ze wszystkimi Twoimi notatkami pobierze się automatycznie.</li>
+                <li>Jeśli Twoje urządzenie na to pozwala, otworzy się menu udostępniania (aby wysłać go e-mailem lub na Drive).</li>
+                <li>Na koniec pojawi się okno z pytaniem, czy chcesz <strong>wyczyścić</strong> (usunąć) notatki z urządzenia po wykonaniu kopii zapasowej. Kliknij "OK", aby zacząć z czystą kartą następnego dnia.</li>
+            </ol>
+
+        </div>
+
+        <!-- ==============================================
+             ROMANIAN VERSION
+             ============================================== -->
+        <div class="lang-content" lang="ro">
+            <h1>📖 Ghid de utilizare: Newtea</h1>
+            
+            <p><strong>Newtea</strong> este o aplicație web progresivă (PWA) concepută pentru crearea, gestionarea și evaluarea testelor agronomice pe teren. A fost creată pentru a fi rapidă, intuitivă și, cel mai important, pentru a funcționa <strong>100% offline</strong> odată instalată pe dispozitivul dvs.</p>
+
+            <h2>1. Instalare pe Smartphone sau Tabletă (Mod Offline)</h2>
+            <p>Pentru a vă asigura că aplicația funcționează în mijlocul unui câmp fără o conexiune la internet, <strong>trebuie</strong> să o instalați pe ecranul principal.</p>
+            <ul>
+                <li><strong>Pe Android (Google Chrome):</strong> Deschideți linkul aplicației. Atingeți cele trei puncte verticale <strong style="font-size:1.2em;">⋮</strong> din colțul din dreapta sus, apoi selectați <em>"Adaugă la ecranul de pornire"</em>.</li>
+                <li><strong>Pe iOS (Apple Safari):</strong> Deschideți linkul aplicației. Atingeți pictograma "Partajare" (pătratul cu o săgeată în sus) din partea de jos a ecranului, derulați în jos și alegeți <em>"Adaugă pe ecranul principal"</em>.</li>
+            </ul>
+            <p>Apoi lansați aplicația de pe noua pictogramă apărută alături de celelalte aplicații.</p>
+
+            <h2>2. Pornire și Configurarea Sesiunii</h2>
+            <p>La deschiderea aplicației, apare ecranul de pornire. Urmați acești pași:</p>
+            <ol>
+                <li>Trebuie să introduceți obligatoriu <strong>Numele / Codul Evaluator</strong>. Acesta va identifica notele dvs. la export.</li>
+                <li>Alegeți cum să începeți sesiunea:
+                    <ul>
+                        <li><strong>Evaluează un test existent:</strong> Selectați un test deja în memorie, apoi bifați/debifați <strong>Protocoalele</strong> pe care doriți să le evaluați.</li>
+                        <li><strong>Import Test (CSV):</strong> Încărcați planul unui test pregătit în Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Descărcați Șablonul CSV</button></li>
+                        <li><strong>Creează test nou:</strong> Dacă nu aveți un fișier, generați o grilă goală introducând numele, specia, coloanele (X) și rândurile (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. Interfața Principală și Navigare</h2>
+            <p>Aplicația este împărțită în două file principale în partea de sus a ecranului: <strong>Notă</strong> (instrumentul principal de lucru) și <strong>Configurare</strong> (pentru setări și exporturi).</p>
+
+            <h3>Cum se selectează o parcelă?</h3>
+            <p>Aplicația oferă două metode extrem de rapide:</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Metoda 1: Scaner Cod QR</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal pentru scanarea directă a etichetei parcelei și validarea instantanee.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Metoda 2: Mini-Plan</strong>
+                    <p style="font-size:0.9em; color:#555;">Ideal pentru a vedea unde vă aflați (coordonate X/Y) și a face clic vizual pe următoarea casetă.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Coduri de Culori ale Planului:</strong><br>
+                Fundalul albastru desemnează tipul <strong>M (Masculin)</strong>, verde este tipul <strong>F (Feminin)</strong>, iar galben este tipul <strong>H (Hibrid)</strong>.<br>
+                Când o parcelă este <strong>hașurată</strong>, înseamnă că o notă a fost deja înregistrată pentru ea! Parcela selectată în prezent este evidențiată cu <strong>verde deschis</strong>.
+            </div>
+
+            <h2>4. Introducerea Observațiilor</h2>
+            <p>Odată parcela selectată (sau scanată via QR), parcela este validată. Acesta deblochează interfața de notare.</p>
+
+            <ol>
+                <li>Deschideți meniurile prin butonul <strong>"► MENIURI"</strong> și selectați ce doriți să evaluați (Stadiu, Înflorire, Parametri, Fotografii...).</li>
+                <li>Introduceți valorile folosind butoanele <code>+</code> / <code>-</code> sau făcând o fotografie 📷.</li>
+                <li>Adăugați <strong>Observații</strong> textuale dacă este necesar (puteți folosi microfonul 🎤 pentru dictare).</li>
+                <li>Faceți clic pe <strong>Salvează</strong> (sau Salv. Următorul) în partea de jos pentru a salva. Nota se va adăuga în tabelul "Ultimele înregistrări".</li>
+            </ol>
+
+            <h2>5. Funcții Avansate pentru Rapiditate</h2>
+
+            <h3>🔲 Intrare în Grup (Selecție Multiplă)</h3>
+            <p>Dacă mai multe parcele din jurul dvs. au exact aceeași valoare (ex: un câmp întreg este în stadiul BBCH 65), utilizați intrarea în grup pentru a economisi timp prețios:</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Stadiu (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Introduceți valoarea "65" în câmpul Stadiu.</li>
+                <li>Faceți clic pe pictograma <strong>🔲</strong> de lângă titlu.</li>
+                <li>Se deschide planul mare de semănat. Faceți clic pe toate parcelele relevante (ele vor deveni roșii). <em>Sfat: faceți clic pe un antet de coloană (X) sau rând (Y) pentru a selecta toată linia deodată!</em></li>
+                <li>Faceți clic pe butonul <strong>"Aplică la selecție"</strong>. Notele sunt salvate imediat.</li>
+            </ol>
+
+            <h3>⭐ Mod Zen (Ecran Complet)</h3>
+            <p>Doriți să evaluați doar un criteriu (ex: înflorirea) și să mergeți repede prin câmp? Activați Modul Zen făcând clic pe steaua <strong>⭐</strong> de lângă titlul notației.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Înflorire (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>Interfața se va extinde pentru a ocupa tot ecranul, cu butoane gigantice.</p>
+            <div class="highlight warning">
+                <strong>⚠️ FOARTE IMPORTANT ÎN MODUL ZEN:</strong><br>
+                În acest mod, un buton <strong>"⏭ Următorul"</strong> apare sus. Vă permite să săriți direct la parcela următoare din punct de vedere geografic... <strong>Dar nu salvează nota!</strong><br><br>
+                Pentru ca nota să fie salvată, <strong>trebuie</strong> să utilizați butoanele "Salvează" situate în partea de jos a ecranului Zen.
+            </div>
+
+            <h2>6. Copie de Rezervă, Export și Securitate</h2>
+            <p>Deoarece aplicația nu necesită internet, <strong>absolut toate datele dvs. sunt stocate în interiorul browserului dvs. de internet</strong>. Ele nu sunt trimise către niciun server.</p>
+
+            <ul>
+                <li>Dacă goliți istoricul sau memoria cache a browserului, <strong>notele dvs. vor fi șterse.</strong></li>
+                <li>De aceea este esențial să vă exportați datele în mod regulat.</li>
+            </ul>
+
+            <p>Mergeți la fila <strong>Configurare (Config)</strong>:</p>
+            <ol>
+                <li>Faceți clic pe <strong>"📥/📤 Salvare CSV, Partajare și Golire"</strong>.</li>
+                <li>Fișierul conținând toate notele dvs. se va descărca automat.</li>
+                <li>Dacă dispozitivul permite, se va deschide un meniu de partajare (pentru a-l trimite prin email sau pe Drive).</li>
+                <li>În final, o casetă de dialog vă va întreba dacă doriți să <strong>goliți</strong> (ștergeți) notele de pe dispozitiv acum că a fost făcută copia de rezervă. Faceți clic pe "OK" pentru a începe pe curat a doua zi.</li>
+            </ol>
+
+        </div>
+
+        <!-- ==============================================
+             UKRAINIAN VERSION
+             ============================================== -->
+        <div class="lang-content" lang="uk">
+            <h1>📖 Посібник користувача: Newtea</h1>
+            
+            <p><strong>Newtea</strong> — це прогресивний веб-додаток (PWA), призначений для створення, управління та оцінювання агрономічних польових випробувань. Він створений швидким, інтуїтивно зрозумілим і, головне, для роботи <strong>на 100% офлайн</strong> після встановлення на ваш пристрій.</p>
+
+            <h2>1. Встановлення на смартфон або планшет (Офлайн-режим)</h2>
+            <p>Щоб програма гарантовано працювала посеред поля без доступу до Інтернету, ви <strong>повинні</strong> встановити її на головний екран.</p>
+            <ul>
+                <li><strong>На Android (Google Chrome):</strong> Відкрийте посилання на програму. Торкніться трьох вертикальних крапок <strong style="font-size:1.2em;">⋮</strong> у верхньому правому куті браузера, потім виберіть <em>"Додати на головний екран"</em>.</li>
+                <li><strong>На iOS (Apple Safari):</strong> Відкрийте посилання на програму. Торкніться значка "Поділитися" (квадрат зі стрілкою вгору) внизу екрана, прокрутіть вниз і виберіть <em>"На початковий екран"</em>.</li>
+            </ul>
+            <p>Потім запустіть програму з нової іконки, що з'явилася разом з іншими вашими програмами.</p>
+
+            <h2>2. Запуск та Налаштування сесії</h2>
+            <p>Після відкриття програми з'явиться головний екран. Виконайте ці кроки:</p>
+            <ol>
+                <li>Вам необхідно обов'язково ввести <strong>Ім'я / Код Оцінювача</strong>. Це дозволить ідентифікувати ваші оцінки під час експорту.</li>
+                <li>Виберіть, як почати сесію:
+                    <ul>
+                        <li><strong>Оцінити існуюче випробування:</strong> Виберіть випробування, що вже збережене в пам'яті, потім виберіть/зніміть вибір з <strong>Протоколів</strong>, які ви хочете оцінити.</li>
+                        <li><strong>Імпорт випробування (CSV):</strong> Завантажте план випробування, підготовлений в Excel. <br>
+                        <button class="btn-print" style="margin-top:5px; font-size:0.8em; padding:4px 8px;" onclick="downloadTemplate()">📥 Завантажити шаблон CSV</button></li>
+                        <li><strong>Створити нове випробування:</strong> Якщо у вас немає файлу, створіть порожню сітку, вказавши назву, вид, колонки (X) та рядки (Y).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>3. Головний інтерфейс та Навігація</h2>
+            <p>Додаток розділений на дві головні вкладки у верхній частині екрана: <strong>Нотатка</strong> (ваш основний робочий інструмент) та <strong>Конфігурація</strong> (налаштування та експорт).</p>
+
+            <h3>Як вибрати ділянку?</h3>
+            <p>Програма пропонує два надзвичайно швидкі методи:</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px;">
+                    <strong>Метод 1: Сканер QR-кодів</strong>
+                    <p style="font-size:0.9em; color:#555;">Ідеально підходить для прямого сканування етикетки ділянки та миттєвого підтвердження.</p>
+                    <div class="mockup">
+                        <div class="m-qr-btn">📷</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px;">
+                    <strong>Метод 2: Міні-план</strong>
+                    <p style="font-size:0.9em; color:#555;">Ідеально, щоб бачити, де ви знаходитесь (координати X/Y), і візуально вибрати наступний квадрат.</p>
+                    <div class="mockup">
+                        <table class="m-table">
+                            <tr><th>Y\X</th><th>1</th><th>2</th><th>3</th></tr>
+                            <tr><th>1</th><td class="m-type-m m-hatched">101</td><td class="m-type-f m-selected">102</td><td class="m-type-h">103</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Кольорові коди плану:</strong><br>
+                Синій фон позначає тип <strong>M (Чоловічий)</strong>, зелений — тип <strong>F (Жіночий)</strong>, а жовтий — тип <strong>H (Гібрид)</strong>.<br>
+                Якщо ділянка <strong>заштрихована</strong>, це означає, що оцінка для неї вже записана! Поточна вибрана ділянка підсвічується <strong>яскраво-зеленим</strong>.
+            </div>
+
+            <h2>4. Введення спостережень</h2>
+            <p>Після вибору ділянки (або сканування за допомогою QR-коду) ділянка підтверджується. Це розблокує інтерфейс оцінювання.</p>
+
+            <ol>
+                <li>Відкрийте меню за допомогою кнопки <strong>"► МЕНЮ"</strong> і виберіть, що ви хочете оцінити (Стадія, Цвітіння, Параметри, Фотографії...).</li>
+                <li>Введіть значення за допомогою кнопок <code>+</code> / <code>-</code> або зробивши фотографію 📷.</li>
+                <li>Додайте текстові <strong>Примітки</strong> за потреби (можна використовувати мікрофон 🎤 для диктування).</li>
+                <li>Натисніть <strong>Зберегти</strong> (або Збер. Далі) у самому низу, щоб зберегти. Нотатка додасться до таблиці "Останні записи".</li>
+            </ol>
+
+            <h2>5. Розширені функції для прискорення роботи</h2>
+
+            <h3>🔲 Групове введення (Множинний вибір)</h3>
+            <p>Якщо кілька ділянок навколо вас мають абсолютно однакове значення (напр., ціле поле на стадії BBCH 65), використовуйте групове введення, щоб заощадити дорогоцінний час:</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Стадія (BBCH) : </span>
+                <span class="m-action-btn" style="margin-left:10px;">🔲</span>
+            </div>
+            <ol>
+                <li>Введіть значення "65" у поле Стадія.</li>
+                <li>Натисніть іконку <strong>🔲</strong> поруч із назвою.</li>
+                <li>Відкриється великий план посіву. Клацніть на всі відповідні ділянки (вони стануть червоними). <em>Порада: натисніть на заголовок колонки (X) або рядка (Y), щоб вибрати всю лінію одразу!</em></li>
+                <li>Натисніть кнопку <strong>"Застосувати до виділеного"</strong>. Оцінки будуть миттєво збережені.</li>
+            </ol>
+
+            <h3>⭐ Режим Zen (Повноекранний)</h3>
+            <p>Хочете оцінювати лише один критерій (напр., цвітіння) і швидко йти по полю? Увімкніть режим Zen, натиснувши зірочку <strong>⭐</strong> поруч із назвою оцінки.</p>
+            <div class="mockup">
+                <span style="font-size:1.1em;">Цвітіння (%) : </span>
+                <span class="m-star-btn" style="margin-left:10px;">⭐</span>
+            </div>
+            <p>Інтерфейс розшириться на весь екран із гігантськими кнопками.</p>
+            <div class="highlight warning">
+                <strong>⚠️ ДУЖЕ ВАЖЛИВО В РЕЖИМІ ZEN:</strong><br>
+                У цьому режимі зверху з'являється кнопка <strong>"⏭ Наступний"</strong>. Вона дозволяє перейти безпосередньо до наступної географічно ділянки... <strong>Але вона не зберігає вашу оцінку!</strong><br><br>
+                Щоб оцінка збереглася, ви <strong>повинні</strong> використовувати кнопки "Зберегти", розташовані в самому низу екрана Zen.
+            </div>
+
+            <h2>6. Резервне копіювання, Експорт та Безпека</h2>
+            <p>Оскільки програма не потребує Інтернету, <strong>абсолютно всі ваші дані зберігаються всередині вашого браузера</strong>. Вони не надсилаються на жоден сервер.</p>
+
+            <ul>
+                <li>Якщо ви очистите історію або кеш вашого браузера, <strong>ваші нотатки будуть видалені.</strong></li>
+                <li>Тому дуже важливо регулярно експортувати свої дані.</li>
+            </ul>
+
+            <p>Перейдіть на вкладку <strong>Конфігурація (Config)</strong>:</p>
+            <ol>
+                <li>Натисніть на <strong>"📥/📤 Зберегти CSV, Поділитися та Очистити"</strong>.</li>
+                <li>Файл з усіма вашими нотатками завантажиться автоматично.</li>
+                <li>Якщо ваш пристрій дозволяє, відкриється меню обміну (щоб надіслати по email або на Drive).</li>
+                <li>Нарешті, діалогове вікно запитає, чи хочете ви <strong>очистити</strong> (видалити) нотатки з пристрою, оскільки резервна копія зроблена. Натисніть "ОК", щоб почати з чистого аркуша наступного дня.</li>
+            </ol>
+
+        </div>
+
+    </div>
+
+    <script>
+        function changeLanguage(lang) {
+            document.body.setAttribute('data-lang', lang);
+            localStorage.setItem('tutorial_lang', lang);
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('tutorial_lang') || 'fr';
+            const select = document.getElementById('lang-selector');
+            if(select) select.value = savedLang;
+            changeLanguage(savedLang);
+        };
+
+        function downloadTemplate() {
+            const headers = "Ent;variete;Essai;Espece;Gps;Plan_X;Plan_Y;Type;Protocole\n";
+            const example = "1;LID 5053L SU;Mon_Essai_2026;Tournesol;43.69,1.27;1;1;H;Proto_A\n";
+            const blob = new Blob([headers + example], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "Modele_Import_Newtea.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
