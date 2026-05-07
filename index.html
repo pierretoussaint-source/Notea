@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.plant-stem-icon { stroke: var(--theme-secondary-color, %234CAF50); stroke-width: 1.5; stroke-linecap: round; }.plant-leaf-icon { fill: var(--theme-secondary-color, %2366BB6A); }.n-stylized-icon { fill: var(--theme-heading-color, %23227A49); }.icon-background { fill: var(--theme-card-background-color, white); stroke: var(--theme-secondary-color, %23DDD); stroke-width:1; }%3C/style%3E%3Ccircle class='icon-background' cx='40' cy='40' r='38'/%3E%3Cpath d='M30 55 L30 25 M30 25 L50 55 M50 55 L50 25' stroke='var(--theme-heading-color, %23227A49)' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cg transform='translate(40, 15) scale(0.45)'%3E%3Cline class='plant-stem-icon' x1='0' y1='10' x2='0' y2='-3'/%3E%3Cellipse cx='0' cy='-8' rx='5' ry='7' fill='var(--theme-sorgho-primary-color, %23C0392B)'/%3E%3C/g%3E%3Cg transform='translate(18, 38) scale(0.45)'%3E%3Cline class='plant-stem-icon' x1='0' y1='12' x2='0' y2='-3'/%3E%3Ccircle cx='0' cy='-8' r='5' fill='var(--theme-primary-color, %23FFD700)'/%3E%3Ccircle cx='0' cy='-8' r='2' fill='var(--theme-secondary-color, %23A0522D)'/%3E%3C/g%3E%3Cg transform='translate(62, 38) scale(0.45)'%3E%3Crect class='plant-leaf-icon' x='-2' y='-10' width='4' height='18' rx='1'/%3E%3Cpath stroke='var(--theme-primary-color, %23E6B800)' stroke-width='1.5' fill='none' d='M-1.5,-10 Q0,-14 1.5,-10 M0,-10 Q-2.5,-13 -3,-9 M0,-10 Q2.5,-13 3,-9'/%3E%3C/g%3E%3Cg transform='translate(25, 60) scale(0.4)'%3E%3Cline class='plant-stem-icon' x1='0' y1='10' x2='0' y2='-1'/%3E%3Ccircle cx='0' cy='-3' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3Ccircle cx='-3' cy='-5' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3Ccircle cx='3' cy='-5' r='2' fill='var(--theme-colza-primary-color, %23FFEB3B)'/%3E%3C/g%3E%3Cg transform='translate(55, 60) scale(0.4)'%3E%3Cpath class='plant-leaf-icon' d='M0,12 Q-8,3 -4,-4 Q0,-8 4,-4 Q8,3 0,12 Z'/%3E%3Ccircle cx='-2' cy='-1' r='1' fill='var(--theme-soja-primary-color, %23E1BEE7)'/%3E%3Ccircle cx='2' cy='-1' r='1' fill='var(--theme-soja-primary-color, %23E1BEE7)'/%3E%3C/g%3E%3C/svg%3E">
-    <title>Newtea (Fusion)</title>
+    <title>Notea</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#227A49">
     
+    <script>
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(() => console.log('Service Worker Enregistré avec succès.'))
+            .catch(err => console.error('Erreur Service Worker', err));
+        });
+    }
+    </script>
     <!-- Ajout du script QR Code -->
     <script src="https://unpkg.com/html5-qrcode"></script>
 
