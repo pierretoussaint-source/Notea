@@ -1,4 +1,4 @@
-const CACHE_NAME = 'newtea-cache-v2';
+const CACHE_NAME = 'Notea';
 
 // Ajout du dossier racine './' et de 'index.html' en minuscules
 const urlsToCache = [
