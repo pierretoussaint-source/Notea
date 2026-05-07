@@ -1,6 +1,6 @@
 {
-  "name": "Newtea - Gestion et Notations d'Essais",
-  "short_name": "Newtea",
+  "name": "Notea - Gestion et Notations d'Essais",
+  "short_name": "Notea",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",
