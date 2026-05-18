@@ -832,37 +832,45 @@ window.stopQRScanner = () => {
 
 function handleQRScanSuccess(decodedText) {
     stopQRScanner();
-    const lieuMatch = decodedText.match(/LIEU\s*:\s*([^,\n\r]+)/i);
-    const xMatch = decodedText.match(/X\s*=\s*(\d+)/i);
-    const yMatch = decodedText.match(/Y\s*=\s*(\d+)/i);
 
-    if (lieuMatch && xMatch && yMatch) {
-        const essai = lieuMatch[1].trim();
-        const x = parseInt(xMatch[1].trim());
-        const y = parseInt(yMatch[1].trim());
+    // Expression régulière pour parser le format : pedigree_annee_lieu_OPP_YxxXxx
+    // Elle capture : 1: Lieu (Essai), 2: Y, 3: X
+    // Exemple matché : MYLADY_2026_Test_OPP_Y01X02 -> Lieu: Test, Y: 01, X: 02
+    const match = decodedText.match(/_([^_]+)_OPP_Y(\d+)X(\d+)/i);
 
+    if (match) {
+        const essai = match[1].trim(); // Extrait le lieu (juste avant _OPP_)
+        const y = parseInt(match[2].trim(), 10); // Extrait Y
+        const x = parseInt(match[3].trim(), 10); // Extrait X
+
+        // Chercher la parcelle correspondante dans la BDD
         const plot = varieteData.find(p => p.Essai === essai && parseInt(p.Plan_X) === x && parseInt(p.Plan_Y) === y);
 
         if (plot) {
             playSuccessSound();
+
+            // S'il s'agit d'un essai différent, on navigue vers celui-ci
             if (currentEssai !== essai) {
                 document.getElementById('choix-essai').value = essai;
-                document.getElementById('choix-essai').dispatchEvent(new Event('change'));
-                selectAllProtocols(true);
+                const event = new Event('change');
+                document.getElementById('choix-essai').dispatchEvent(event);
+                selectAllProtocols(true); // Active tous les protocoles de ce nouvel essai par précaution
                 document.getElementById('confirmer-essai').click();
             }
 
+            // Forcer l'affichage de l'onglet "Appareil Photo" (Note) si on était sur Home ou Config
             document.querySelectorAll('.tabcontent').forEach(x=>x.style.display='none');
             document.querySelectorAll('.tablink').forEach(x=>x.classList.remove('active'));
             document.getElementById('Note').style.display='block';
             document.getElementById('defaultOpen').classList.add('active');
 
+            // Sélectionner la parcelle via son UUID unique
             selectedPlotUuid = plot._uuid;
             updateUIForSelectedPlot(selectedPlotUuid);
 
+            // Valider la parcelle automatiquement
             parcelleValideeUuid = selectedPlotUuid;
             document.getElementById('valider-parcelle').style.display = 'none';
-            document.getElementById('rep').value = 'A';
             
             const notationArea = document.getElementById('central-notations-container');
             const obsArea = document.getElementById('obs').parentNode;
@@ -870,14 +878,15 @@ function handleQRScanSuccess(decodedText) {
             [notationArea, obsArea, saveArea].forEach(el => {
                 if(el) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; }
             });
+
         } else {
-            alert(`Parcelle introuvable pour l'essai "${essai}" (X: ${x}, Y: ${y})`);
+            alert(`Parcelle introuvable dans la base de données pour l'essai "${essai}" (X: ${x}, Y: ${y})`);
         }
     } else {
-        alert("Format QR Code invalide. Attendu:\nLIEU : Test\nY= 1\nX = 2");
+        // Message d'erreur mis à jour avec le nouveau format d'exemple
+        alert("Format du QR Code invalide.\nExemple attendu : MYLADY_2026_Test_OPP_Y01X02\n\nContenu scanné :\n" + decodedText);
     }
-}
-// =====================================================
+}// =====================================================
 
 // =================== INTERACTIVE OVERLAY & MINI PLAN ===================
 window.populateInteractiveFilters = () => {
